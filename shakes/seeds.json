@@ -1,0 +1,16 @@
+[
+{
+  "model": "shakes.shake",
+  "pk": 1,
+  "fields": {
+    "name": "Indian Mango Lassi",
+    "image": "https://placehold.co/400x400",
+    "plan": "Vegetarian",
+    "calories": 230,
+    "nutritional_info": "Good source of probiotics and vitamin A",
+    "ingredients": "[\"1 cup ripe mango\", \"chopped\", \"1 cup plain yogurt\", \"1/2 cup milk\", \"2 tsp sugar\", \"a pinch of ground cardamom\"]",
+    "instructions": "Blend mango, yogurt, milk, sugar, and cardamom until smooth.",
+    "owner": 10
+  }
+}
+]
