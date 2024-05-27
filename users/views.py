@@ -4,10 +4,15 @@ from .serializers.common import RegisterSerializer
 from .serializers.populated import ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
 
-# Create your views here.
+
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+
+
+
+
+   
 
 
 class ProfileView(RetrieveAPIView):

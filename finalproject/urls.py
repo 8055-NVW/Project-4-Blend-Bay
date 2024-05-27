@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/shakes/', include('shakes.urls')),
     path('api/auth/', include('users.urls')),
-    path('api/reviews/', include('reviews.urls'))
+    path('api/reviews/', include('reviews.urls')),
+    # OAUTH
+    path('accounts/', include('allauth.urls')),
 ]

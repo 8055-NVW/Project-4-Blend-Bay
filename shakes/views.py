@@ -9,7 +9,7 @@ from rest_framework.response import Response
 
 class ShakeIndexView(ObjectOwnerView, ListCreateAPIView):
     queryset = Shake.objects.all()
-    serializer_class = ShakeSerializer
+    serializer_class = PopulatedShakeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
@@ -41,12 +41,3 @@ class ShakeFavouriteView(UpdateAPIView):
             shake.favourites.add(request.user)
             shake.save()
             return Response(status=201)
-
-# class UserFavouriteShakeView(ListCreateAPIView):
-#     permission_classes = [IsAuthenticatedOrReadOnly]
-
-#     def get(self,request):
-#         user = request.user
-#         favourite_shakes = user.favourite_shakes.all()
-#         serializer = ShakeSerializer(favourite_shakes, many=True)
-#         return Response(serializer.data)
