@@ -6,9 +6,9 @@ class Shake(models.Model):
 
     name = models.CharField(max_length=100)
     image = models.URLField(max_length=500, blank=True, null=True)
-    plan = models.CharField(max_length=50)
+    # plan = models.CharField(max_length=50)
     calories = models.PositiveIntegerField()
-    nutritional_info = models.CharField(max_length=100)
+    # nutritional_info = models.CharField(max_length=100)
     categories = models.ManyToManyField(
         'categories.Category',
         related_name='shakes'
@@ -28,7 +28,6 @@ class Shake(models.Model):
         related_name='favorite_shakes',
         blank=True
     )
-    # New Stuff above
 
     def __str__(self):
-        return f'Name:{self.name}, Plan:{self.plan}'
+        return f'Name:{self.name}'

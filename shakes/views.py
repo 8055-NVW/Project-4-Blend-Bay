@@ -1,5 +1,5 @@
 from .serializers.common import ShakeSerializer
-from .serializers.populated import PopulatedRecordSerializer
+from .serializers.populated import PopulatedShakeSerializer
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from lib.permissions import IsOwnerOrReadOnly
@@ -19,7 +19,7 @@ class ShakeDetailView(RetrieveUpdateDestroyAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return PopulatedRecordSerializer
+            return PopulatedShakeSerializer
         else:
             return ShakeSerializer
 

@@ -5,12 +5,55 @@
   "fields": {
     "name": "Indian Mango Lassi",
     "image": "https://placehold.co/400x400",
-    "plan": "Vegetarian",
     "calories": 230,
-    "nutritional_info": "Good source of probiotics and vitamin A",
     "ingredients": "[\"1 cup ripe mango\", \"chopped\", \"1 cup plain yogurt\", \"1/2 cup milk\", \"2 tsp sugar\", \"a pinch of ground cardamom\"]",
     "instructions": "Blend mango, yogurt, milk, sugar, and cardamom until smooth.",
-    "owner": 10
+    "owner": 10,
+    "categories": [
+      1,
+      2,
+      3
+    ],
+    "favourites": [
+      10,
+      11
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 2,
+  "fields": {
+    "name": "Another One",
+    "image": null,
+    "calories": 350,
+    "ingredients": "[\"1 Banana\", \"2 tbsp Penut-Butter\", \"1/4 cup Oats\", \"1/2 cup Greek Yogurt\", \"1/2 cup Almond Milk\", \"1/4 cup Ice Cubes\"]",
+    "instructions": "Blend until smooth and creamy",
+    "owner": 12,
+    "categories": [
+      1
+    ],
+    "favourites": [
+      12
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 3,
+  "fields": {
+    "name": "Shake 2",
+    "image": null,
+    "calories": 250,
+    "ingredients": "[\"1 Banana\", \"2 tbsp Penut-Butter\", \"1/4 cup Oats\", \"1/2 cup Greek Yogurt\", \"1/2 cup Almond Milk\", \"1/4 cup Ice Cubes\"]",
+    "instructions": "Blend until smooth and creamy",
+    "owner": 12,
+    "categories": [
+      1,
+      2,
+      3
+    ],
+    "favourites": []
   }
 }
 ]
