@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 
-function App() {
+export default function Landing() {
 
   useEffect(() => {
     async function getShakeData(){
@@ -16,8 +16,6 @@ function App() {
   })
 
   return (
-    <h1>Hello World</h1>
+    <h1>Landing Page</h1>
   )
 }
-
-export default App
