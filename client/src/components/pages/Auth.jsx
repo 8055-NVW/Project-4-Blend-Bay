@@ -1,41 +1,27 @@
 
-// import GoogleButton from 'react-google-button'
-
-
-// export default function Auth() {
-//     return (
-//         <div>
-//             <h1>Auth</h1>
-//             <GoogleButton
-//                 onClick={() => { console.log('Google button clicked') }}
-//             />
-//         </div>
-//     )
-// }
-
 import { useState } from 'react'
 import axios from 'axios'
 import { setToken } from '../../lib/auth'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { GoogleLogin } from '@react-oauth/google'
+
+
+import { TextField, Button, Typography, Container, Box } from '@mui/material'
+import { FormControl } from '@mui/base/FormControl'
+import { shadows } from '@mui/system';
 
 export default function Auth() {
-
-    //Local variable
     const navigate = useNavigate();
 
+    const [error, setError] = useState('')
+    const [isSignup, setIsSignUp] = useState(true)
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
         password_confirmation: '',
-        image: 'https://via.placeholder.com/300'
+        image: 'https://placehold.co/400x400'
     })
-
-    const [error, setError] = useState('')
-
-
-    //For Login/Register States
-    const [isSignup, setIsSignUp] = useState(true)
 
     const switchStatus = () => {
         setIsSignUp((previousState) => !previousState)
@@ -46,73 +32,152 @@ export default function Auth() {
         setError('')
     }
 
-    //Function to handle form submission
+
     async function handleSubmit(e) {
         e.preventDefault()
         try {
             if (isSignup) {
-                console.log(typeof(formData))
-                // await axios.post('/api/auth/register/', formData)
-                // switchStatus()
+                await axios.post('/api/auth/register/', formData)
+                switchStatus()
             }
-            const { data: { token } } = await axios.post('/api/auth/login/', {
-                email: formData.email,
+            const { data: { access } } = await axios.post('/api/auth/login/', {
+                username: formData.username,
                 password: formData.password
             })
-
-            setToken(token)
-            navigate("/home")
-
+            setToken(access)
+            navigate("/")
         } catch (error) {
-            setError(error.response.data)
+            console.log(error.response.data)
         }
     }
 
+    // TESTING
+    const responseMessage = (response) => {
+        console.log(response);
+    };
+    const errorMessage = (error) => {
+        console.log(`Error: ${error}`);
+    };
+    // async function handleGoogleLogin(e) {
+    //     e.preventDefault()
+    //     console.log(e)
+    // try {
+    //     const data = await axios.post('/api/accounts/google/login/?process=login/', {
+    //         access_token: e.credential,
+    //     })
+    //     console.log(data)
+    //     setToken(access)
+    //     navigate("/")
+    // } catch (error) {
+    //     console.log(error.response.data)
+    // }
+    // }
+
     return (
-        <div className="auth-container ">
-            <div className='form-page flex-grow-1 d-flex flex-column justify-content-center align-items-center'>
-                <h2>{isSignup ? 'Sign Up' : 'Sign In'}</h2>
-                <form className="d-flex flex-column " onSubmit={handleSubmit}>
-                    {isSignup && (
-                        <>
-                            <div className='form-floating mb-3'>
-                                <input type='text' className="form-control" name='username' id='username' placeholder='Username' onChange={handleChange} value={formData.username} />
-                                <label htmlFor="username">Username</label>
-                            </div>
-                        </>
+        <Container 
+            sx={{display:'flex',
+                flexDirection:'column',
+                // height:'100%',
+                justifyContent:'center',
+                alignItems:'center',
+                maxWidth:'sm',
+                boxShadow: 3
+            }}>
+            <Typography
+                variant="h3"
+                sx={{ textAlign: 'center', my: 3 }}>
+                {isSignup ? 'Sign Up' : 'Sign In'}
+            </Typography>
+            <Box
+            sx={{ display: 'flex', 
+                justifyContent: 'center', 
+                marginTop: 7,
+                width:'auto'}}>
+                <GoogleLogin
+                    onSuccess={responseMessage}
+                    onError={errorMessage}
+                    size='large'
+                />
+            </Box>
+            <FormControl 
+            onSubmit={handleSubmit}>
+                {isSignup && (
+                    <>
+                        <TextField
+                            type="email"
+                            label="Email"
+                            name="email"
+                            variant="standard"
+                            value={formData.email}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                    </>
+                )}
+                <TextField
+                    type="text"
+                    label="Username"
+                    name="username"
+                    variant="standard"
+                    value={formData.username}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    type="password"
+                    label="Password"
+                    name="password"
+                    variant="standard"
+                    value={formData.password}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                />
+                {isSignup && (
+                    <>
+                        <TextField
+                            type="password"
+                            label="Confirm Password"
+                            name="password_confirmation"
+                            variant="standard"
+                            value={formData.password_confirmation}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                    </>
+                )}
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    sx={{ marginTop: 4 }}
+                >
+                    {isSignup ? 'Sign Up' : 'Sign In'}
+                </Button>
+                <Container
+                    sx={{ textAlign: 'center' }}>
+                    {error && (
+                        <Typography
+                            variant="body1"
+                            className="text-center mt-3 text-danger">
+                            {error.email || error.username || error.message || 'Invalid details. Please please try again'}
+                        </Typography>
                     )}
-                    <div className='form-floating mb-3'>
-                        <input type='email' className="form-control" name='email' id='email' placeholder='Email' onChange={handleChange} value={formData.email} />
-                        <label htmlFor="email">Email</label>
-                    </div>
-                    <div className='form-floating mb-3'>
-                        <input type='password' className="form-control" name='password' id='password' placeholder='Password' onChange={handleChange} value={formData.password} />
-                        <label htmlFor="password">Password</label>
-                    </div>
-                    {isSignup && (
-                        <>
-                            <div className='form-floating mb-3'>
-                                <input type='password' className="form-control" name='password_confirmation' id='password_confirmation' placeholder='Confirm Password' onChange={handleChange} value={formData.password_confirmation} />
-                                <label htmlFor="password_confirmation">Confirm Password</label>
-                            </div>
-                        </>
-                    )}
-                    <button type='submit' className='btn btn-teal mt-3'>
-                        {isSignup ? 'Sign Up' : 'Sign In'}
-                    </button>
-                    <div className='text-center'>
-                        {error &&
-                            <p className='text-center mt-3 text-danger'>
-                                {error.email || error.username || error.message || 'Invalid details. Please please try again'}
-                            </p>}
-                        <div>
-                            <button type='button' className='btn dynamic m-4' onClick={switchStatus}>
-                                {isSignup ? 'Already have an account? Sign In' : 'New here? Create an Account '}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+                    <Box>
+                        <Button
+                            type="button"
+                            variant="outlined"
+                            onClick={switchStatus}
+                            sx={{ my: 3 }}>
+                            {isSignup ? 'Already have an account? Sign In' : 'New here? Create an Account '}
+                        </Button>
+                    </Box>
+                </Container>
+            </FormControl>
+        </Container>
     )
 }

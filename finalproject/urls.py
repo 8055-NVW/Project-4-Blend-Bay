@@ -24,5 +24,5 @@ urlpatterns = [
     path('api/auth/', include('users.urls')),
     path('api/reviews/', include('reviews.urls')),
     # OAUTH
-    path('accounts/', include('allauth.urls')),
+    path('api/accounts/', include('allauth.urls')),
 ]

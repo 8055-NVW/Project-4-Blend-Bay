@@ -5,9 +5,9 @@ import Footer from "./components/subcomponents/Footer"
 
 export default function Root() {
   return (
-    <div>
+    <div className='parent'>
       <Navbar />
-      <main>
+      <main className="main">
         <Outlet />
       </main>
       <Footer />
