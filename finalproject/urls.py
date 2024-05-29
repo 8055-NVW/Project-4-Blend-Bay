@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/shakes/', include('shakes.urls')),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('api/reviews/', include('reviews.urls')),
     # OAUTH
     path('api/accounts/', include('allauth.urls')),
+
 ]
