@@ -12,6 +12,7 @@ import './styles/main.scss'
 // Components
 import Auth from './components/pages/Auth.jsx'
 import Home from './components/pages/Home.jsx'
+import Landing from './components/pages/Landing.jsx'
 import Profile from './components/pages/Profile.jsx'
 
 // Material UI Theme
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
+        element: <Landing />
+      },
+      {
+        path: 'home',
         element: <Home />
       },
       {

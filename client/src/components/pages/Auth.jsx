@@ -1,38 +1,40 @@
 
-import { useState } from 'react'
 import axios from 'axios'
+import { useState } from 'react'
 import { setToken } from '../../lib/auth'
 import { useNavigate } from "react-router-dom"
-import { GoogleLogin } from '@react-oauth/google'
-import PhotoCamera from '@mui/icons-material/PhotoCamera'
+// import { GoogleLogin } from '@react-oauth/google'
 
+// Material UI Imports
 import { TextField, Button, Typography, Container, Box, Input } from '@mui/material'
-import { FormControl } from '@mui/base/FormControl'
+import PhotoCamera from '@mui/icons-material/PhotoCamera'
+// import { FormControl } from '@mui/base/FormControl'
 import { styled } from '@mui/material/styles'
+
+const FormContainer = styled('div')({
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+})
 
 export default function Auth() {
     // Material UI
-    const FormContainer = styled('div')({
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    })
 
+    const navigate = useNavigate()
 
-
-    const navigate = useNavigate();
-
-    const [error, setError] = useState('')
-    const [isSignup, setIsSignUp] = useState(true)
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
+        username: '',
         password: '',
         password_confirmation: '',
         image: 'https://placehold.co/400x400'
     })
 
+    const [error, setError] = useState('')
+
+    const [isSignup, setIsSignUp] = useState(true)
+    
     const switchStatus = () => {
         setIsSignUp((previousState) => !previousState)
     }
@@ -41,7 +43,6 @@ export default function Auth() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
         setError('')
     }
-
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -55,21 +56,26 @@ export default function Auth() {
                 password: formData.password
             })
             setToken(access)
-            navigate("/")
+            navigate("/home")
         } catch (error) {
-            console.log(error.response.data)
+            const err = error.response.data
+            const key = Object.keys(err)[0]
+            const value = err[key]
+            setError(value)
+
+            
         }
     }
 
     // TESTING
-    const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
+    // const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
-    const responseMessage = (response) => {
-        console.log(response);
-    };
-    const errorMessage = (error) => {
-        console.log(`Error: ${error}`);
-    };
+    // const responseMessage = (response) => {
+    //     console.log(response);
+    // };
+    // const errorMessage = (error) => {
+    //     console.log(`Error: ${error}`);
+    // };
     // async function handleGoogleLogin(e) {
     //     e.preventDefault()
     //     console.log(e)
@@ -97,26 +103,18 @@ export default function Auth() {
                     boxShadow: 3,
                     borderRadius: 4,
                 }}>
-                <Typography
-                    variant="h3"
-                    sx={{ my: 3 }}>
+                <Typography variant="h3" sx={{ my: 3 }}>
                     {isSignup ? 'Sign Up' : 'Sign In'}
                 </Typography>
                 {/* Google Login */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        marginTop: 7,
-                        width: 'auto'
-                    }}>
+                {/* <Box sx={{display: 'flex',marginTop:7,width:'auto'}}>
                     <GoogleLogin
                         clientId={GOOGLE_CLIENT_ID}
                         onSuccess={responseMessage}
                         onError={errorMessage}
                     />
-                </Box>
-                <FormControl className='form'
-                    onSubmit={handleSubmit}>
+                </Box> */}
+                <form className='form' onSubmit={handleSubmit}>
                     {isSignup && (
                         <>
                             <TextField
@@ -131,7 +129,7 @@ export default function Auth() {
                             />
                         </>
                     )}
-                    <TextField
+                    <TextField 
                         type="text"
                         label="Username"
                         name="username"
@@ -145,6 +143,7 @@ export default function Auth() {
                         type="password"
                         label="Password"
                         name="password"
+                        id='password'
                         variant="standard"
                         value={formData.password}
                         onChange={handleChange}
@@ -207,12 +206,11 @@ export default function Auth() {
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
                     <Container
-                        sx={{ textAlign: 'center' }}>
+                        sx={{ textAlign: 'center', pt:2 }}>
                         {error && (
                             <Typography
-                                variant="body1"
-                                className="text-center mt-3 text-danger">
-                                {error.email || error.username || error.message || 'Invalid details. Please please try again'}
+                                variant="body1">
+                                {error}
                             </Typography>
                         )}
                         <Box>
@@ -225,8 +223,8 @@ export default function Auth() {
                             </Button>
                         </Box>
                     </Container>
-                </FormControl>
+                </form>
             </Container>
-        </FormContainer>
+         </FormContainer>
     )
 }
