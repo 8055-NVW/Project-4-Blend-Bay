@@ -6,9 +6,7 @@ class Shake(models.Model):
 
     name = models.CharField(max_length=100)
     image = models.URLField(max_length=500, blank=True, null=True)
-    # plan = models.CharField(max_length=50)
     calories = models.PositiveIntegerField()
-    # nutritional_info = models.CharField(max_length=100)
     categories = models.ManyToManyField(
         'categories.Category',
         related_name='shakes'

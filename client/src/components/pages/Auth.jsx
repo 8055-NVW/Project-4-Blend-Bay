@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom"
 // Material UI Imports
 import { TextField, Button, Typography, Container, Box, Input } from '@mui/material'
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
-// import { FormControl } from '@mui/base/FormControl'
 import { styled } from '@mui/material/styles'
 
 const FormContainer = styled('div')({
@@ -143,7 +142,6 @@ export default function Auth() {
                         type="password"
                         label="Password"
                         name="password"
-                        id='password'
                         variant="standard"
                         value={formData.password}
                         onChange={handleChange}
@@ -205,8 +203,7 @@ export default function Auth() {
                     >
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
-                    <Container
-                        sx={{ textAlign: 'center', pt:2 }}>
+                    <Container sx={{ textAlign: 'center', pt:2 }}>
                         {error && (
                             <Typography
                                 variant="body1">

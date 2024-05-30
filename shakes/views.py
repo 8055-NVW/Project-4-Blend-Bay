@@ -7,14 +7,24 @@ from .models import Shake
 from lib.views import ObjectOwnerView
 from rest_framework.response import Response
 
+# new
+from django.db.models import Avg
+
+
 class ShakeIndexView(ObjectOwnerView, ListCreateAPIView):
-    queryset = Shake.objects.all()
-    serializer_class = PopulatedShakeSerializer
+    # queryset = Shake.objects.all()
+    queryset = Shake.objects.annotate(average_rating=Avg('reviews__rating'))
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return PopulatedShakeSerializer
+        return ShakeSerializer
 
 
 class ShakeDetailView(RetrieveUpdateDestroyAPIView):
-    queryset = Shake.objects.all()
+    # queryset = Shake.objects.all()
+    queryset = Shake.objects.annotate(average_rating=Avg('reviews__rating'))
     permission_classes = [IsOwnerOrReadOnly]
 
     def get_serializer_class(self):

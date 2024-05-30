@@ -14,6 +14,9 @@ import Auth from './components/pages/Auth.jsx'
 import Home from './components/pages/Home.jsx'
 import Landing from './components/pages/Landing.jsx'
 import Profile from './components/pages/Profile.jsx'
+import Shake from './components/pages/Shake.jsx'
+import AddShake from './components/pages/AddShake.jsx'
+import UpdateShake from './components/pages/UpdateShake.jsx'
 
 // Material UI Theme
 const theme = createTheme({
@@ -50,6 +53,18 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'shake/:id',
+        element: <Shake />
+      },
+      {
+        path: 'addshake',
+        element: <AddShake />
+      },
+      {
+        path: 'updateshake/:id',
+        element: <UpdateShake />
       }
     ]
   }

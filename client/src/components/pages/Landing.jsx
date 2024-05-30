@@ -30,10 +30,10 @@ export default function Landing() {
   return (
     <LandingPageContainer>
       <Typography variant="h2" gutterBottom>
-        Welcome to Our Platform
+        Welcome to my Website Bla Bla
       </Typography>
       <Typography variant="body1" gutterBottom>
-        Discover amazing content and connect with like-minded individuals.
+      Bla BlaBla BlaBla BlaBla BlaBla BlaBla Bla
       </Typography>
       <CenteredBox>
         <Button variant="contained" color="primary" onClick={handleSignUp}>
@@ -41,7 +41,7 @@ export default function Landing() {
         </Button>
       </CenteredBox>
       <Typography variant="body1">
-        Join us today and start exploring!
+        Join up and start explorng!
       </Typography>
     </LandingPageContainer>
   )

@@ -5,5 +5,5 @@ class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
         # the below is a touple hence the trailing comma
-        fields = ('name',)
+        fields = '__all__'
 
