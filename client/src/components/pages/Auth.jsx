@@ -1,15 +1,18 @@
 
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { setToken } from '../../lib/auth'
 import { useNavigate } from "react-router-dom"
 // import { GoogleLogin } from '@react-oauth/google'
 
+// Custom Components
+import ImageUpload from '../elements/ImageUpload'
+
 // Material UI Imports
 import { TextField, Button, Typography, Container, Box, Input } from '@mui/material'
-import PhotoCamera from '@mui/icons-material/PhotoCamera'
 import { styled } from '@mui/material/styles'
 
+// Material UI
 const FormContainer = styled('div')({
     height: '100%',
     display: 'flex',
@@ -18,21 +21,20 @@ const FormContainer = styled('div')({
 })
 
 export default function Auth() {
-    // Material UI
+
 
     const navigate = useNavigate()
+    const [error, setError] = useState('')
+    const [isSignup, setIsSignUp] = useState(true)
 
     const [formData, setFormData] = useState({
         email: '',
         username: '',
         password: '',
         password_confirmation: '',
-        image: 'https://placehold.co/400x400'
+        image: 'https://res.cloudinary.com/drdpt4mru/image/upload/v1717109451/Project-4%20GA/angj9hllxdsax5nx0tds.png'
     })
 
-    const [error, setError] = useState('')
-
-    const [isSignup, setIsSignUp] = useState(true)
     
     const switchStatus = () => {
         setIsSignUp((previousState) => !previousState)
@@ -50,11 +52,13 @@ export default function Auth() {
                 await axios.post('/api/auth/register/', formData)
                 switchStatus()
             }
-            const { data: { access } } = await axios.post('/api/auth/login/', {
+            const { data: { access, user } } = await axios.post('/api/auth/login/', {
                 username: formData.username,
                 password: formData.password
             })
             setToken(access)
+            // setUser(access)
+            console.log(user)
             navigate("/home")
         } catch (error) {
             const err = error.response.data
@@ -158,55 +162,21 @@ export default function Auth() {
                                 value={formData.password_confirmation}
                                 onChange={handleChange}
                                 fullWidth
-                                margin="normal"
-                            />
+                                margin="normal"/>
+                            <ImageUpload formData={formData} setFormData={setFormData}  profile='True'/>
                         </>
                     )}
-                    {/* Image Upload */}
-                    {isSignup && (
-                        <Box sx={{
-                            width: '70%',
-                            mt: 3,
-                        }}>
-                            <Button
-                                variant="contained"
-                                component="label"
-                                fullWidth
-                                startIcon={<PhotoCamera />}
-                            >
-                                Add a Profile Picture
-                                <Input
-                                    type="file"
-                                    name="image"
-                                    onChange={handleChange}
-                                    hidden
-                                    inputProps={{ accept: 'image/*' }}
-                                    sx={{
-                                        display: 'none',
-                                    }}
-                                />
-                            </Button>
-                            {formData.image && (
-                                <Typography variant="body1" sx={{ ml: 2 }}>
-                                    {formData.image.name}
-                                </Typography>
-                            )}
-                        </Box>
-                    )}
-
                     <Button
                         type="submit"
                         variant="contained"
                         color="primary"
                         fullWidth
-                        sx={{ marginTop: 4 }}
-                    >
+                        sx={{ marginTop: 4 }}>
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
-                    <Container sx={{ textAlign: 'center', pt:2 }}>
+                    <Container sx={{ textAlign:'center', pt:2 }}>
                         {error && (
-                            <Typography
-                                variant="body1">
+                            <Typography variant="body1">
                                 {error}
                             </Typography>
                         )}
@@ -216,7 +186,7 @@ export default function Auth() {
                                 variant="outlined"
                                 onClick={switchStatus}
                                 sx={{ my: 3 }}>
-                                {isSignup ? 'Already have an account? Sign In' : 'New here? Create an Account '}
+                                {isSignup ? 'Already have an account? Sign In':'New here ? Create an Account'}
                             </Button>
                         </Box>
                     </Container>

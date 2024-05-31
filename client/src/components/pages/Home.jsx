@@ -19,7 +19,12 @@ export default function Home() {
       try {
         const { data } = await axios.get('/api/shakes/')
         setShakeData(data)
-        // console.log(data)
+        // data.map((shake) => {
+        //   const { categories } = shake
+        //   categories.map((category) => {
+        //     console.log(category.id)
+        //   })
+        // })
       } catch (error) {
         console.log(error)
         setError(error)
@@ -30,21 +35,20 @@ export default function Home() {
 
   return (
     <Container sx={{ textAlign: 'center', height: '100%' }}>
-      <Typography variant='h3' sx={{ mt:2 }}>
+      <Typography variant='h3' sx={{ mt: 2 }}>
         Shakes
       </Typography>
       {shakeData.map((shake) => {
         const { id, name, categories, calories, image, average_rating, owner } = shake
 
-        return (
-          <>
+        return (      
             <Box key={id} sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3 }}>
               <Typography variant='h4' sx={{ mb: 2 }}>
                 {name}
               </Typography>
-              <Container sx={{ display:'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
+              <Container sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
                 <Box>
-                  <Box component='img' alt={name} src={image} />
+                  <Box className='shake-image' component='img' alt={name} src={image} />
                   <Typography variant='h5' sx={{ m: 2 }}>
                     Rating: {average_rating || 'No Ratings Yet'}
                   </Typography>
@@ -52,13 +56,9 @@ export default function Home() {
                 <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <Box sx={{ textAlign: 'left', display: 'flex', flexDirection: 'column' }}>
                     <Typography variant='h5' sx={{ my: 2 }}>
-                      Categories: {categories.map((category) => {
-                        return (
-                          <>
-                            <Typography key={category.id}>{category.name}</Typography>
-                          </>
-                        )
-                      })}
+                      Categories: {categories.map((category) =>
+                        <Typography key={category.id}>{category.name}</Typography>
+                      )}
                     </Typography>
                     <Typography variant='h5' sx={{ my: 2 }}>
                       Calories: {calories}
@@ -68,10 +68,11 @@ export default function Home() {
                   <Box sx={{ pb: { xs: 4, sm: 8 } }}>
                     <Button sx={{ display: 'flex', flexDirection: 'column', margin: 'auto', pb: 4 }}
                       onClick={() => navigate('/profile')}>
-                      <Box sx={{ borderRadius: '50%' }}
+                      <Box className='profile-image' id='home'
+                        sx={{ borderRadius: '50%' }}
                         component='img'
                         alt='user.image'
-                        src='owner.image' />
+                        src={owner.image} />
                       <Typography>
                         {owner.username}
                       </Typography>
@@ -84,7 +85,6 @@ export default function Home() {
                 </Container>
               </Container>
             </Box>
-          </>
         )
       })}
     </Container>

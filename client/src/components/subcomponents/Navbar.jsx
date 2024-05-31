@@ -76,7 +76,7 @@ export default function Navbar() {
       console.log('Handling profile page' )
     }
   }
-
+  
   const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenUserMenu = (event) => {

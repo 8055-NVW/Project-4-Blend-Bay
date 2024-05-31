@@ -16,3 +16,24 @@ body {
 .form {
     display: contents;
 }
+
+.shake-image {
+    height: 360px;
+    width: 360px;
+    object-fit: cover;
+}
+
+.profile-image {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+}
+
+#home {
+    height: 100px;
+    width: 100px;  
+}

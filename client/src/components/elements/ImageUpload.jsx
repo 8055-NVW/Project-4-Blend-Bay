@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-import {Button, Input} from '@mui/material'
+import {Button, Input, Box} from '@mui/material'
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
 
 
-export default function ImageUpload({ formData, setFormData }){
+export default function ImageUpload({ formData, setFormData , profile}){
 
   const [error, setError] = useState('')
 
@@ -27,13 +27,13 @@ export default function ImageUpload({ formData, setFormData }){
 
   return (
     <>
-        { formData.image && <img src={formData.image} alt="Uploaded image" />}
+        { formData.image && <Box sx={{textAlign:'center'}}><img className={profile ? 'profile-image':'shake-image'} src={formData.image} alt="Uploaded image" /></Box>}
         <Button
             variant="contained"
             component="label"
             fullWidth
             startIcon={<PhotoCamera />}>
-                Add a  Picture
+                Add a Picture
             <Input
                 type="file"
                 name="image"

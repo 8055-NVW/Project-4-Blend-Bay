@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: 'shake/:id',
+        path: 'shake/:shakeId',
         element: <Shake />
       },
       {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         element: <AddShake />
       },
       {
-        path: 'updateshake/:id',
+        path: 'updateshake/:shakeId',
         element: <UpdateShake />
       }
     ]
@@ -74,7 +74,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
       </ThemeProvider>
     </GoogleOAuthProvider>
   </React.StrictMode >
