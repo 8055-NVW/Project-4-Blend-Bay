@@ -56,7 +56,7 @@ export default function Auth() {
                 username: formData.username,
                 password: formData.password
             })
-            setToken(access)
+            // setToken(access)
             // setUser(access)
             console.log(user)
             navigate("/home")

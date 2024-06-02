@@ -38,12 +38,14 @@ class ShakeFavouriteView(UpdateAPIView):
     serializer_class = ShakeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+
     def patch(self, request, pk):
         shake = self.get_object()
         if request.user in shake.favourites.all():
             print('User in favourites list')
             shake.favourites.remove(request.user)
             shake.save()
+            print(request.META)
             return Response(status=204)
 
         else:

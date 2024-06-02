@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { getToken } from '../../lib/auth'
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import axios from 'axios'
 
 
@@ -18,12 +18,9 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 
 
+export default function ShakeReviews({shakeData, reloadReviewData}) {
 
-
-
-export default function ShakeReviews({shakeData}) {
-
-    //FOR FORM DIALOGUE
+    //FOR  Material UI FORM DIALOGUE
     const [open, setOpen] = useState(false)
     
     const handleClickOpen = () => {
@@ -33,21 +30,18 @@ export default function ShakeReviews({shakeData}) {
         setOpen(false)
     }
 
-    // FOR RATING
     const { shakeId } = useParams()
-    // const [value, setValue] = useState(1)
     const [reviewData, setReviewData] = useState({
         text:'',
         rating: 0,
         shake: shakeId
     })
 
-
     function handleChange(e) {
         setReviewData({ ...reviewData, [e.target.name]: e.target.value })
         // console.log(e.target.name,e.target.value)
-
     }
+
     const handleSubmit = async () => {
         try {
             const data = await axios.post(`/api/reviews/`, reviewData, {
@@ -57,11 +51,13 @@ export default function ShakeReviews({shakeData}) {
             })
             console.log(data)
             handleClose()
+            reloadReviewData()
         } catch (error) {
             console.log(error.response.data)
-
         }
     }
+
+
 
     return (
         <Box sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3, pb: 3 }}>

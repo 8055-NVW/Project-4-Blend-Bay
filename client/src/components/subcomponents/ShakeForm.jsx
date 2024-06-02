@@ -24,7 +24,6 @@ export default function ShakeForm({ title, request, onLoad }) {
   const [error, setError] = useState('')
   const [allCategories, setAllCategories] = useState([])
 
-
 // DYNAMICALLY ADD OR UPDATE SHAKE
   async function handleSubmit(e) {
     e.preventDefault()

@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { jwtDecode } from 'jwt-decode'
+import { getToken } from '../../lib/auth'
 
 // Material UI imports
-import { Container, Typography, Box, Button,Rating } from '@mui/material'
-import OpenInFullIcon from '@mui/icons-material/OpenInFull'
-import EditIcon from '@mui/icons-material/Edit'
+import { Container, Typography, Box, Button, Rating } from '@mui/material'
 
 // Custom Components
+import ButtonBox from './ButtonBox'
 import ShakeContent from './ShakeContent'
 import ShakeReviews from './ShakeReviews'
 
@@ -15,17 +16,24 @@ export default function ShakeBrief({ request, singleView = false }) {
     const navigate = useNavigate('')
     const [shakeData, setShakeData] = useState(singleView ? null : [])
 
+    // TO GET THE USER ID FROM THE TOKEN
+    const userId = (() => {
+        const decoded = jwtDecode(getToken())
+        return decoded.user_id
+    })
+
+ 
+    const getShakeData = async () => {
+        try {
+            const { data } = await request()
+            setShakeData(data)
+            // console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        async function getShakeData() {
-            try {
-                const { data } = await request()
-                setShakeData(data)
-                console.log(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
         getShakeData()
     }, [request])
 
@@ -42,7 +50,7 @@ export default function ShakeBrief({ request, singleView = false }) {
                     <Box>
                         <Box className='shake-image' component='img' alt={name} src={image} />
                         <Typography variant='h6' sx={{ m: 3 }}>
-                           {average_rating? <Rating value={average_rating} readOnly size="large"/> : 'No Ratings Yet'}
+                            {average_rating ? <Rating value={average_rating} readOnly size="large" /> : 'No Ratings Yet'}
                         </Typography>
                     </Box>
                     <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -57,21 +65,34 @@ export default function ShakeBrief({ request, singleView = false }) {
                             </Typography>
                         </Box>
                         <Box sx={{ pb: { xs: 4, sm: 8 } }}>
-                            <Button sx={{ display: 'flex', flexDirection: 'column', margin: 'auto', pb: 4 }}
-                                onClick={() => navigate('/profile')}>
-                                <Box className='profile-image' id='home'
-                                    sx={{ borderRadius: '50%' }}
-                                    component='img'
-                                    alt='user.image'
-                                    src={owner.image} />
-                                <Typography>
-                                    {owner.username}
-                                </Typography>
-                            </Button>
-                            <Container sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <Button variant='contained' onClick={() => navigate(`/updateshake/${id}`)}><EditIcon /></Button>
-                                <Button variant='contained' onClick={() => navigate(`/shake/${id}`)}><OpenInFullIcon /></Button>
-                            </Container>
+                            {owner.id === userId() ? (
+                                <>
+                                    <Box className='profile-image' id='home'
+                                        sx={{ borderRadius: '50%' }}
+                                        component='img'
+                                        alt='user.image'
+                                        src={owner.image} />
+                                    <Typography>
+                                        You
+                                    </Typography>
+                                </>
+                            ) : (
+                                <>
+                                    <Button sx={{ display: 'flex', flexDirection: 'column', margin: 'auto', pb: 4 }}
+                                        onClick={() => navigate('/profile')}>
+                                        <Box className='profile-image' id='home'
+                                            sx={{ borderRadius: '50%' }}
+                                            component='img'
+                                            alt='user.image'
+                                            src={owner.image} />
+                                        <Typography>
+                                            {owner.username}
+                                        </Typography>
+                                    </Button>
+                                </>
+                            )}
+                            {/* CUSTOM COMPONENT */}
+                            <ButtonBox id={id} singleView={singleView} userId={userId()} ownerId={owner.id}/>
                         </Box>
                     </Container>
                 </Container>
@@ -84,13 +105,19 @@ export default function ShakeBrief({ request, singleView = false }) {
             <Typography variant='h3' sx={{ mt: 2 }}>
                 {singleView ? 'Your Shake' : 'All Shakes'}
             </Typography>
+            {/* To define a single shake request or index */}
             {singleView ? (
                 shakeData && renderShakeDetails(shakeData)
             ) : (
                 shakeData.map((shake) => renderShakeDetails(shake))
             )}
-            <ShakeContent shakeData={shakeData}/>
-            <ShakeReviews shakeData={shakeData}/>
+            {/* To ensure below only load on single view */}
+            {singleView &&
+                <>
+                    <ShakeContent shakeData={shakeData} />
+                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} />
+                </>
+            }
         </Container>
     )
 }
