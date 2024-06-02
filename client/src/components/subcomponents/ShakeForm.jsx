@@ -65,7 +65,7 @@ export default function ShakeForm({ title, request, onLoad }) {
     getAllCategories()
   }, [])
 
-  //GET SHAKE EXISTING DATA FOR UPDATE
+  //GET EXISTING SHAKE DATA FOR UPDATE
   useEffect(() => {
     async function getShakeData() {
       try {

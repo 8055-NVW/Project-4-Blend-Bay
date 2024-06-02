@@ -14,7 +14,6 @@ class Review(models.Model):
         'users.User',
         related_name='reviews_created',
         on_delete=models.CASCADE,
-        # good habit 
         blank=True
     )
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])

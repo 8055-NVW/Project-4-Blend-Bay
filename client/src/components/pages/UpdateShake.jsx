@@ -14,6 +14,6 @@ export default function UpdateShake() {
     }})}
 
     return (
-        <ShakeForm  title='Update' request={request} onLoad={true} shakeId={shakeId} />
+        <ShakeForm  title='Update' request={request} onLoad={true}/>
     )
 }
