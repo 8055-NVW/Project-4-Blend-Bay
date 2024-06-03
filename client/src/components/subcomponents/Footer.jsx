@@ -32,7 +32,7 @@ export default function Footer() {
         </IconButton>
         <IconButton
           component="a"
-          href="https://www.linkedin.com/in/your-linkedin-username"
+          href="https://www.linkedin.com/in/vivian-lopes-44094798/"
           target="_blank"
           aria-label="LinkedIn"
           color="inherit"

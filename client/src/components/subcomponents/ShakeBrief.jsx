@@ -7,6 +7,7 @@ import { getToken } from '../../lib/auth'
 import { Container, Typography, Box, Button, Rating } from '@mui/material'
 
 // Custom Components
+import ProfileCard from '../elements/ProfileCard'
 import ButtonBox from './ButtonBox'
 import ShakeContent from './ShakeContent'
 import ShakeReviews from './ShakeReviews'
@@ -22,12 +23,10 @@ export default function ShakeBrief({ request, singleView = false }) {
         return decoded.user_id
     })
 
- 
     const getShakeData = async () => {
         try {
             const { data } = await request()
             setShakeData(data)
-            // console.log(data)
         } catch (error) {
             console.log(error)
         }
@@ -40,7 +39,7 @@ export default function ShakeBrief({ request, singleView = false }) {
     // This saves the destructuring and return to a const so we dont have to repeat this code block. 
     // Will try to improve on this as im not sure if having it out of the return is the best way to do it
     const renderShakeDetails = (shake) => {
-        const { id, name, categories, calories, image, average_rating, owner } = shake
+        const { id, name, categories, calories, image, average_rating, owner, favourites } = shake
         return (
             <Box key={id} sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3 }}>
                 <Typography variant='h4' sx={{ mb: 2 }}>
@@ -65,6 +64,7 @@ export default function ShakeBrief({ request, singleView = false }) {
                             </Typography>
                         </Box>
                         <Box sx={{ pb: { xs: 4, sm: 8 } }}>
+                            
                             {owner.id === userId() ? (
                                 <>
                                     <Box className='profile-image' id='home'
@@ -79,7 +79,7 @@ export default function ShakeBrief({ request, singleView = false }) {
                             ) : (
                                 <>
                                     <Button sx={{ display: 'flex', flexDirection: 'column', margin: 'auto', pb: 4 }}
-                                        onClick={() => navigate('/profile')}>
+                                        onClick={() => navigate(`/profile/${owner.id}`)}>
                                         <Box className='profile-image' id='home'
                                             sx={{ borderRadius: '50%' }}
                                             component='img'
@@ -92,7 +92,7 @@ export default function ShakeBrief({ request, singleView = false }) {
                                 </>
                             )}
                             {/* CUSTOM COMPONENT */}
-                            <ButtonBox id={id} singleView={singleView} userId={userId()} ownerId={owner.id}/>
+                            <ButtonBox id={id} singleView={singleView} userId={userId()} ownerId={owner.id} favourites={favourites} />
                         </Box>
                     </Container>
                 </Container>
@@ -115,7 +115,7 @@ export default function ShakeBrief({ request, singleView = false }) {
             {singleView &&
                 <>
                     <ShakeContent shakeData={shakeData} />
-                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} />
+                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} userId={userId} />
                 </>
             }
         </Container>

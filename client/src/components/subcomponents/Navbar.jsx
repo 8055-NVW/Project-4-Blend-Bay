@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import { isLoggedIn, removeToken } from "../../lib/auth"
+import { isLoggedIn, removeToken, getToken } from "../../lib/auth"
+import { jwtDecode } from 'jwt-decode'
+
+
 // Material UI Imports
 import { AppBar, Toolbar, Typography, Box } from "@mui/material"
+import Fingerprint from '@mui/icons-material/Fingerprint';
 import HomeRounded from "@mui/icons-material/HomeRounded"
 import { styled, alpha } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search'
-import LoginIcon from '@mui/icons-material/Login'
 import IconButton from '@mui/material/IconButton'
 import InputBase from '@mui/material/InputBase'
 import MenuItem from '@mui/material/MenuItem'
@@ -62,21 +65,23 @@ export default function Navbar() {
 
   const navigate = useNavigate()
 
-  function handleLogout() {
-    removeToken()
-    navigate("/")
-  }
+  // TO GET THE USER ID FROM THE TOKEN
+  const userId = (() => {
+    const decoded = jwtDecode(getToken())
+    return decoded.user_id
+  })
 
   function handleGoTo(goTo) {
     if (goTo === 'Logout') {
-      // handleLogout()
+      removeToken()
+      navigate("/")
       console.log('handle loggin out')
-    } else if (goTo === 'Profile'){
-      // navigate(`/profile`)
-      console.log('Handling profile page' )
+    } else if (goTo === 'Profile') {
+      navigate(`/profile/${userId}`)
+      console.log('Handling profile page')
     }
   }
-  
+
   const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenUserMenu = (event) => {
@@ -126,19 +131,22 @@ export default function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 {goTos.map((goTo) => (
-                  <MenuItem key={goTo} onClick={handleCloseUserMenu}>
-                    <Link to={handleGoTo}>
-                      <Typography textAlign="center">{goTo}</Typography>
-                    </Link>
+                  <MenuItem key={goTo}
+                    onClick={() => {
+                      handleGoTo(goTo);
+                      handleCloseUserMenu();
+                    }}>
+                    <Typography textAlign="center">{goTo}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </>
             ) :
             (<>
-              <IconButton>
+              <IconButton size="large">
                 <NavLink to='/auth'>
-                  <LoginIcon/>
+                  {/* <LoginIcon/> */}
+                  <Fingerprint sx={{ color: 'white', border: '1px solid white', borderRadius: '50%', width: '35px', height: '35px' }} />
                 </NavLink>
               </IconButton>
             </>

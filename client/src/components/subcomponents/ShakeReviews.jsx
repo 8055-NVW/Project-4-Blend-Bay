@@ -1,7 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { getToken } from '../../lib/auth'
-import { useState , useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
+
+// Custom Components
+import ConfirmDelete from '../elements/ConfirmDelete'
 
 
 // Material UI Imports
@@ -18,11 +21,11 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 
 
-export default function ShakeReviews({shakeData, reloadReviewData}) {
+export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
 
     //FOR  Material UI FORM DIALOGUE
     const [open, setOpen] = useState(false)
-    
+
     const handleClickOpen = () => {
         setOpen(true);
     }
@@ -32,7 +35,7 @@ export default function ShakeReviews({shakeData, reloadReviewData}) {
 
     const { shakeId } = useParams()
     const [reviewData, setReviewData] = useState({
-        text:'',
+        text: '',
         rating: 0,
         shake: shakeId
     })
@@ -44,12 +47,11 @@ export default function ShakeReviews({shakeData, reloadReviewData}) {
 
     const handleSubmit = async () => {
         try {
-            const data = await axios.post(`/api/reviews/`, reviewData, {
+            await axios.post(`/api/reviews/`, reviewData, {
                 headers: {
                     Authorization: `Bearer ${getToken()}`
-                }  
+                }
             })
-            console.log(data)
             handleClose()
             reloadReviewData()
         } catch (error) {
@@ -65,8 +67,8 @@ export default function ShakeReviews({shakeData, reloadReviewData}) {
             <Container>
                 {shakeData ? (
                     shakeData.reviews.length > 0 ? (
-                        shakeData.reviews.map((review, id) => {
-                            const { owner, text, created_at, rating } = review
+                        shakeData.reviews.map((review) => {
+                            const { owner, text, created_at, rating,id } = review
                             return (
                                 <Box key={id} sx={{ my: 2, p: 2, border: '1px solid #ccc', borderRadius: 2 }}>
                                     <Typography variant="h6">{owner.username}</Typography>
@@ -74,6 +76,12 @@ export default function ShakeReviews({shakeData, reloadReviewData}) {
                                     {/* converted to .localeDateString() ...new for cleaner format */}
                                     <Typography variant="body2" sx={{ color: 'gray' }}>{new Date(created_at).toLocaleDateString()}</Typography>
                                     <Rating value={rating} readOnly size="medium" />
+                                    {/* Custom Component to Delete */}
+                                    {owner.id === userId &&
+                                    <Box>
+                                        <ConfirmDelete id={id} type='review' reloadReviewData={reloadReviewData} />
+                                    </Box>
+                                    }
                                 </Box>
                             )
                         })
@@ -105,8 +113,7 @@ export default function ShakeReviews({shakeData, reloadReviewData}) {
                     <DialogTitle>Add a Review</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We
-                            will send updates occasionally.
+                            Your unique shake experience counts. Share your personal taste adventure with us!
                         </DialogContentText>
                         <TextField
                             autoFocus

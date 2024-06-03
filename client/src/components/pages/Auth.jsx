@@ -22,7 +22,6 @@ const FormContainer = styled('div')({
 
 export default function Auth() {
 
-
     const navigate = useNavigate()
     const [error, setError] = useState('')
     const [isSignup, setIsSignUp] = useState(true)
@@ -52,13 +51,11 @@ export default function Auth() {
                 await axios.post('/api/auth/register/', formData)
                 switchStatus()
             }
-            const { data: { access, user } } = await axios.post('/api/auth/login/', {
+            const { data: { access } } = await axios.post('/api/auth/login/', {
                 username: formData.username,
                 password: formData.password
             })
-            // setToken(access)
-            // setUser(access)
-            console.log(user)
+            setToken(access)
             navigate("/home")
         } catch (error) {
             const err = error.response.data
