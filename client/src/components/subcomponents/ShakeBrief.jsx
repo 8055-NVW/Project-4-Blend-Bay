@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode'
 import { getToken } from '../../lib/auth'
 
 // Material UI imports
-import { Container, Typography, Box, Button, Rating } from '@mui/material'
+import { Container, Typography, Box, Rating } from '@mui/material'
 
 // Custom Components
 import ProfileCard from '../elements/ProfileCard'
@@ -12,9 +12,9 @@ import ButtonBox from './ButtonBox'
 import ShakeContent from './ShakeContent'
 import ShakeReviews from './ShakeReviews'
 
-export default function ShakeBrief({ request, singleView = false }) {
+export default function ShakeBrief({ request, singleView = false , profileView = false}) {
 
-    const navigate = useNavigate('')
+    const navigate = useNavigate()
     const [shakeData, setShakeData] = useState(singleView ? null : [])
 
     // TO GET THE USER ID FROM THE TOKEN
@@ -25,8 +25,13 @@ export default function ShakeBrief({ request, singleView = false }) {
 
     const getShakeData = async () => {
         try {
-            const { data } = await request()
-            setShakeData(data)
+            if (profileView){
+                setShakeData(request)
+                console.log(shakeData)
+            } else {
+                const { data } = await request()
+                setShakeData(data)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -35,6 +40,7 @@ export default function ShakeBrief({ request, singleView = false }) {
     useEffect(() => {
         getShakeData()
     }, [request])
+    
 
     // This saves the destructuring and return to a const so we dont have to repeat this code block. 
     // Will try to improve on this as im not sure if having it out of the return is the best way to do it
@@ -64,34 +70,8 @@ export default function ShakeBrief({ request, singleView = false }) {
                             </Typography>
                         </Box>
                         <Box sx={{ pb: { xs: 4, sm: 8 } }}>
-                            
-                            {owner.id === userId() ? (
-                                <>
-                                    <Box className='profile-image' id='home'
-                                        sx={{ borderRadius: '50%' }}
-                                        component='img'
-                                        alt='user.image'
-                                        src={owner.image} />
-                                    <Typography>
-                                        You
-                                    </Typography>
-                                </>
-                            ) : (
-                                <>
-                                    <Button sx={{ display: 'flex', flexDirection: 'column', margin: 'auto', pb: 4 }}
-                                        onClick={() => navigate(`/profile/${owner.id}`)}>
-                                        <Box className='profile-image' id='home'
-                                            sx={{ borderRadius: '50%' }}
-                                            component='img'
-                                            alt='user.image'
-                                            src={owner.image} />
-                                        <Typography>
-                                            {owner.username}
-                                        </Typography>
-                                    </Button>
-                                </>
-                            )}
-                            {/* CUSTOM COMPONENT */}
+                            {/* Profile Card Component */}
+                            <ProfileCard owner={owner} userId={userId()} />
                             <ButtonBox id={id} singleView={singleView} userId={userId()} ownerId={owner.id} favourites={favourites} />
                         </Box>
                     </Container>

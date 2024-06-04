@@ -9,6 +9,9 @@ import ToggleFavourite from "../elements/ToggleFavourite";
 
 export default function ButtonBox({ id, singleView, userId, ownerId , favourites}) {
 
+
+    
+
     const navigate = useNavigate()
     // console.log(favourites.includes(userId))
     return (

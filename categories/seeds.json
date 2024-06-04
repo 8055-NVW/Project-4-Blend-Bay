@@ -10,21 +10,63 @@
   "model": "categories.category",
   "pk": 2,
   "fields": {
-    "name": "High Fibre"
+    "name": "Gluten-Free"
   }
 },
 {
   "model": "categories.category",
   "pk": 3,
   "fields": {
-    "name": "Gluten-Free"
+    "name": "Protein"
   }
 },
 {
   "model": "categories.category",
   "pk": 4,
   "fields": {
-    "name": "Vitamin K"
+    "name": "Fruit Smoothies"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 5,
+  "fields": {
+    "name": "Milkshakes"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 6,
+  "fields": {
+    "name": "Keto-Friendly"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 7,
+  "fields": {
+    "name": "Superfood"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 8,
+  "fields": {
+    "name": "Alcoholic"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 9,
+  "fields": {
+    "name": "Nutty"
+  }
+},
+{
+  "model": "categories.category",
+  "pk": 10,
+  "fields": {
+    "name": "Vitamin-Enriched"
   }
 }
 ]

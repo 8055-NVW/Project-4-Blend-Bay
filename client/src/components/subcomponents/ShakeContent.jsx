@@ -18,7 +18,7 @@ export default function ShakeContent({ shakeData }) {
                             ))}
                         </List>
                     </Container>
-                    <Container sx={{ my: 2,  border: '1px solid #ccc', borderRadius: 2 }}>
+                    <Container sx={{ my: 2, border: '1px solid #ccc', borderRadius: 2 }}>
                         <Typography variant="h5">Instructions</Typography>
                         {<Typography variant="body1">{shakeData.instructions}</Typography>}
                     </Container>
@@ -31,3 +31,4 @@ export default function ShakeContent({ shakeData }) {
         </Box>
     )
 }
+

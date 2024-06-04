@@ -1,57 +1,112 @@
 [
 {
   "model": "shakes.shake",
-  "pk": 1,
-  "fields": {
-    "name": "Indian Mango Lassi",
-    "image": "https://placehold.co/400x400",
-    "calories": 230,
-    "ingredients": "[\"1 cup ripe mango\", \"chopped\", \"1 cup plain yogurt\", \"1/2 cup milk\", \"2 tsp sugar\", \"a pinch of ground cardamom\"]",
-    "instructions": "Blend mango, yogurt, milk, sugar, and cardamom until smooth.",
-    "owner": 10,
-    "categories": [
-      1,
-      2,
-      3
-    ],
-    "favourites": [
-      10,
-      11
-    ]
-  }
-},
-{
-  "model": "shakes.shake",
-  "pk": 2,
-  "fields": {
-    "name": "Another One",
-    "image": null,
-    "calories": 350,
-    "ingredients": "[\"1 Banana\", \"2 tbsp Penut-Butter\", \"1/4 cup Oats\", \"1/2 cup Greek Yogurt\", \"1/2 cup Almond Milk\", \"1/4 cup Ice Cubes\"]",
-    "instructions": "Blend until smooth and creamy",
-    "owner": 12,
-    "categories": [
-      1
-    ],
-    "favourites": [
-      12
-    ]
-  }
-},
-{
-  "model": "shakes.shake",
   "pk": 3,
   "fields": {
-    "name": "Shake 2",
-    "image": null,
-    "calories": 250,
-    "ingredients": "[\"1 Banana\", \"2 tbsp Penut-Butter\", \"1/4 cup Oats\", \"1/2 cup Greek Yogurt\", \"1/2 cup Almond Milk\", \"1/4 cup Ice Cubes\"]",
-    "instructions": "Blend until smooth and creamy",
-    "owner": 12,
+    "name": "Tropical Green Smoothie",
+    "image": "https://placehold.co/400x400",
+    "calories": 300,
+    "ingredients": "[\"1 cup spinach\", \"1 cup pineapple chunks\", \"1 banana\", \"1 cup almond milk\", \"1 tbsp honey\"]",
+    "instructions": "Add all ingredients to a blender and blend on high speed until smooth and creamy. If the smoothie is too thick, add a splash of almond milk or water to achieve desired consistency.",
+    "owner": 14,
     "categories": [
       1,
+      4,
+      7
+    ],
+    "favourites": []
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 4,
+  "fields": {
+    "name": "Peanut Butter Banana Shake",
+    "image": "https://placehold.co/400x400",
+    "calories": 450,
+    "ingredients": "[\"1 banana\", \"2 tbsp peanut butter\", \"1 cup milk\", \"1 scoop vanilla protein powder\", \"1 tsp cinnamon\"]",
+    "instructions": "Combine all ingredients in a blender and blend until smooth and creamy. For a thicker shake, add a few ice cubes and blend again briefly.",
+    "owner": 14,
+    "categories": [
+      9,
+      3,
+      5
+    ],
+    "favourites": [
+      23
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 5,
+  "fields": {
+    "name": "Strawberry Keto Smoothie",
+    "image": "https://placehold.co/400x400",
+    "calories": 250,
+    "ingredients": "[\"1 cup strawberries\", \"1 cup unsweetened almond milk\", \"1/4 cup chia seeds\", \"1 tbsp MCT oil\", \"1 scoop vanilla protein powder\"]",
+    "instructions": "In a blender, combine the strawberries, almond milk, chia seeds, MCT oil, and protein powder. Blend on high speed until smooth and creamy, scraping down the sides as needed.",
+    "owner": 23,
+    "categories": [
+      3,
+      6
+    ],
+    "favourites": [
+      53
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 6,
+  "fields": {
+    "name": "Chocolate Avocado Shake",
+    "image": "https://placehold.co/400x400",
+    "calories": 400,
+    "ingredients": "[\"1 ripe avocado\", \"1 cup unsweetened almond milk\", \"2 tbsp cocoa powder\", \"2 tbsp maple syrup\", \"1 tsp vanilla extract\"]",
+    "instructions": "Add all ingredients to a high-powered blender and blend until completely smooth and creamy, about 1-2 minutes. If the shake is too thick, add a splash of almond milk to reach desired consistency.",
+    "owner": 23,
+    "categories": [
+      1,
+      6,
+      7
+    ],
+    "favourites": []
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 15,
+  "fields": {
+    "name": "sdfasdfs",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717155985/Project-4%20GA/njezbhnri8dwiifius5p.jpg",
+    "calories": 22323,
+    "ingredients": "[\"2342\", \"sadfasdf\", \"asdfsadf\", \"sadfasdf\", \"sdfsdf\", \"23r\", \"sdf\"]",
+    "instructions": "a sdasdasd afds df sadfsadf asdfsdf asfsdf",
+    "owner": 54,
+    "categories": [
+      3,
+      5
+    ],
+    "favourites": [
+      53
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 16,
+  "fields": {
+    "name": "Check if update",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717194885/Project-4%20GA/c815ujyiet2r3ozfso6w.jpg",
+    "calories": 777,
+    "ingredients": "[\"check1\", \"check2\", \"check 3\"]",
+    "instructions": "check again",
+    "owner": 53,
+    "categories": [
+      8,
       2,
-      3
+      10
     ],
     "favourites": []
   }

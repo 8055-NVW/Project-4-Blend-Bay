@@ -4,12 +4,13 @@ import { useState, useContext } from 'react'
 import { setToken } from '../../lib/auth'
 import { useNavigate } from "react-router-dom"
 import { GoogleLogin } from '@react-oauth/google'
+import Cookie from 'js-cookie'
 
 // Custom Components
 import ImageUpload from '../elements/ImageUpload'
 
 // Material UI Imports
-import { TextField, Button, Typography, Container, Box, Input } from '@mui/material'
+import { TextField, Button, Typography, Container, Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 // Material UI
@@ -68,20 +69,19 @@ export default function Auth() {
     // TESTING
     const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
-    // const responseMessage = (response) => {
-    //     console.log(response);
-        // const credential = response.credential
-        // return credential
-    // };
     const errorMessage = (error) => {
         console.log(`Error: ${error}`);
     };
     async function handleGoogleLogin(e) {
         // e.preventDefault()
-        console.log(e.credential)
+        // console.log(e)
     try {
         const response = await axios.post('/api/accounts/google/login/', {
             access_token: e.credential,
+        },{
+            headers: {
+                'X-CSRFToken': Cookie.get("csrftoken")
+            }
         })
         console.log(response.data)
         // setToken(access)

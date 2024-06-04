@@ -75,10 +75,10 @@ export default function Navbar() {
     if (goTo === 'Logout') {
       removeToken()
       navigate("/")
-      console.log('handle loggin out')
+      // console.log('handle loggin out')
     } else if (goTo === 'Profile') {
-      navigate(`/profile/${userId}`)
-      console.log('Handling profile page')
+      navigate(`/profile/${userId()}/`)
+      // console.log('Handling profile page')
     }
   }
 

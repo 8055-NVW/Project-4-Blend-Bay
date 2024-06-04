@@ -1,0 +1,46 @@
+[
+{
+  "model": "reviews.review",
+  "pk": 1,
+  "fields": {
+    "text": "Soo nutty. Its really good",
+    "created_at": "2024-05-27T14:18:20.272Z",
+    "shake": 4,
+    "owner": 23,
+    "rating": 4
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 8,
+  "fields": {
+    "text": "i love it!!",
+    "created_at": "2024-06-02T18:01:45.380Z",
+    "shake": 4,
+    "owner": 53,
+    "rating": 5
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 12,
+  "fields": {
+    "text": "a new review!!!",
+    "created_at": "2024-06-03T18:37:10.655Z",
+    "shake": 4,
+    "owner": 53,
+    "rating": 5
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 14,
+  "fields": {
+    "text": "I shouldnt be able to review my own stuff",
+    "created_at": "2024-06-04T09:16:24.216Z",
+    "shake": 16,
+    "owner": 53,
+    "rating": 5
+  }
+}
+]
