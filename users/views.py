@@ -22,4 +22,3 @@ class ProfileView(RetrieveAPIView):
 # oauth
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
-google_login = GoogleLogin.as_view()

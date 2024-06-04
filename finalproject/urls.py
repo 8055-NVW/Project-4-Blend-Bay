@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users.views import GoogleLogin
 
 
 urlpatterns = [
@@ -26,5 +27,6 @@ urlpatterns = [
     path('api/categories/', include('categories.urls')),
     # OAUTH
     path('api/accounts/', include('allauth.urls')),
+    path('api/accounts/google/login/', GoogleLogin.as_view(), name='google_login'),
 
 ]

@@ -32,6 +32,8 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
     const handleClose = () => {
         setOpen(false)
     }
+    // console.log(shakeData.reviews)
+    // console.log(userId)
 
     const { shakeId } = useParams()
     const [reviewData, setReviewData] = useState({
@@ -59,8 +61,6 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
         }
     }
 
-
-
     return (
         <Box sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3, pb: 3 }}>
             <ReviewsIcon sx={{ fontSize: 60, mt: 1 }} />
@@ -68,7 +68,7 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
                 {shakeData ? (
                     shakeData.reviews.length > 0 ? (
                         shakeData.reviews.map((review) => {
-                            const { owner, text, created_at, rating,id } = review
+                            const { owner, text, created_at, rating, id } = review
                             return (
                                 <Box key={id} sx={{ my: 2, p: 2, border: '1px solid #ccc', borderRadius: 2 }}>
                                     <Typography variant="h6">{owner.username}</Typography>
@@ -77,7 +77,7 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
                                     <Typography variant="body2" sx={{ color: 'gray' }}>{new Date(created_at).toLocaleDateString()}</Typography>
                                     <Rating value={rating} readOnly size="medium" />
                                     {/* Custom Component to Delete */}
-                                    {owner.id === userId &&
+                                    {owner.id === userId && 
                                     <Box>
                                         <ConfirmDelete id={id} type='review' reloadReviewData={reloadReviewData} />
                                     </Box>

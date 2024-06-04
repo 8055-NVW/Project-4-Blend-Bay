@@ -115,7 +115,7 @@ export default function ShakeBrief({ request, singleView = false }) {
             {singleView &&
                 <>
                     <ShakeContent shakeData={shakeData} />
-                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} userId={userId} />
+                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} userId={userId()} />
                 </>
             }
         </Container>

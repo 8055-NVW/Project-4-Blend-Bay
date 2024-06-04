@@ -12,5 +12,5 @@ urlpatterns = [
     path('profile/<int:pk>/', ProfileView.as_view()),
     
     # new
-    path('google/login/', views.google_login, name='google_login')
+    # path('google/login/', views.google_login, name='google_login'),
 ]

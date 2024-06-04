@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useContext } from 'react'
 import { setToken } from '../../lib/auth'
 import { useNavigate } from "react-router-dom"
-// import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin } from '@react-oauth/google'
 
 // Custom Components
 import ImageUpload from '../elements/ImageUpload'
@@ -62,34 +62,34 @@ export default function Auth() {
             const key = Object.keys(err)[0]
             const value = err[key]
             setError(value)
-
-            
         }
     }
 
     // TESTING
-    // const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
+    const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
     // const responseMessage = (response) => {
     //     console.log(response);
+        // const credential = response.credential
+        // return credential
     // };
-    // const errorMessage = (error) => {
-    //     console.log(`Error: ${error}`);
-    // };
-    // async function handleGoogleLogin(e) {
-    //     e.preventDefault()
-    //     console.log(e)
-    // try {
-    //     const data = await axios.post('/api/accounts/google/login/?process=login/', {
-    //         access_token: e.credential,
-    //     })
-    //     console.log(data)
-    //     setToken(access)
-    //     navigate("/")
-    // } catch (error) {
-    //     console.log(error.response.data)
-    // }
-    // }
+    const errorMessage = (error) => {
+        console.log(`Error: ${error}`);
+    };
+    async function handleGoogleLogin(e) {
+        // e.preventDefault()
+        console.log(e.credential)
+    try {
+        const response = await axios.post('/api/accounts/google/login/', {
+            access_token: e.credential,
+        })
+        console.log(response.data)
+        // setToken(access)
+        // navigate("/")
+    } catch (error) {
+        console.log(error.response.data)
+    }
+    }
 
     return (
         <FormContainer>
@@ -107,13 +107,13 @@ export default function Auth() {
                     {isSignup ? 'Sign Up' : 'Sign In'}
                 </Typography>
                 {/* Google Login */}
-                {/* <Box sx={{display: 'flex',marginTop:7,width:'auto'}}>
+                <Box sx={{display: 'flex',marginTop:7,width:'auto'}}>
                     <GoogleLogin
                         clientId={GOOGLE_CLIENT_ID}
-                        onSuccess={responseMessage}
+                        onSuccess={handleGoogleLogin}
                         onError={errorMessage}
                     />
-                </Box> */}
+                </Box>
                 <form className='form' onSubmit={handleSubmit}>
                     {isSignup && (
                         <>
