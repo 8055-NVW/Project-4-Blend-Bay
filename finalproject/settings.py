@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 
-# For Deployment
+
+## for Heroku Deployment
+import django_on_heroku
+
 import os
+
 
 
 
@@ -263,3 +267,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'client', "dist"),
 )
 
+
+# for Heroku Deployment
+django_on_heroku.settings(locals())
