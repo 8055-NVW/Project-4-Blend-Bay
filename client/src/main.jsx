@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+<<<<<<< HEAD
 import Root from './Root.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -84,3 +85,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </GoogleOAuthProvider>
   </React.StrictMode >
 )
+=======
+import App from './App.jsx'
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+>>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085

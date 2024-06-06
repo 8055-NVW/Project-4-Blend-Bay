@@ -1,6 +1,7 @@
 [
 {
   "model": "shakes.shake",
+<<<<<<< HEAD
   "pk": 3,
   "fields": {
     "name": "Tropical Green Smoothie",
@@ -109,6 +110,18 @@
       10
     ],
     "favourites": []
+=======
+  "pk": 1,
+  "fields": {
+    "name": "Indian Mango Lassi",
+    "image": "https://placehold.co/400x400",
+    "plan": "Vegetarian",
+    "calories": 230,
+    "nutritional_info": "Good source of probiotics and vitamin A",
+    "ingredients": "[\"1 cup ripe mango\", \"chopped\", \"1 cup plain yogurt\", \"1/2 cup milk\", \"2 tsp sugar\", \"a pinch of ground cardamom\"]",
+    "instructions": "Blend mango, yogurt, milk, sugar, and cardamom until smooth.",
+    "owner": 10
+>>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
   }
 }
 ]

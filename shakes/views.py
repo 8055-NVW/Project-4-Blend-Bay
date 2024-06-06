@@ -41,7 +41,6 @@ class ShakeFavouriteView(UpdateAPIView):
     serializer_class = ShakeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-
     def patch(self, request, pk):
         shake = self.get_object()
         if request.user in shake.favourites.all():
