@@ -15,7 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+# new For Deployment
+from django.urls import path, include, re_path
+from .views import index
+# new ^^^^
+# from django.urls import path, include
 from users.views import GoogleLogin
 
 from django.middleware.csrf import get_token
@@ -37,5 +41,7 @@ urlpatterns = [
     # path('api/accounts/', include('allauth.urls')),
     path('api/accounts/google/login/', GoogleLogin.as_view(), name='google_login'),
     # new
-    path('api/set-token/', set_csrf_token)
+    path('api/set-token/', set_csrf_token),
+    # For Deployment
+    re_path(r'^.*$', index)
 ]
