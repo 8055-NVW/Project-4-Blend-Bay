@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 
 
-## for Heroku Deployment
+
 import django_on_heroku
 
 import os
