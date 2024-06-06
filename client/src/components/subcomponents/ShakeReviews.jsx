@@ -65,7 +65,13 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
     }
 
     return (
-        <Box sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3, pb: 3 }}>
+        <Box sx={{ 
+                boxShadow: 3, 
+                borderRadius: 1, 
+                pt: 0, 
+                my: 3, 
+                pb: 3 ,
+                backgroundColor: 'rgba(254, 254, 254, 0.955)'}}>
             <ReviewsIcon sx={{ fontSize: 60, mt: 1 }} />
             <Container>
                 {shakeData ? (

@@ -4,7 +4,12 @@ import BlenderIcon from '@mui/icons-material/Blender';
 
 export default function ShakeContent({ shakeData }) {
     return (
-        <Box sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3 }}>
+        <Box sx={{ 
+                boxShadow: 3, 
+                borderRadius: 1, 
+                pt: 1, 
+                my: 3 ,
+                backgroundColor: 'rgba(254, 254, 254, 0.955)'}}>
             {shakeData ? (
                 <>
                     <Container>
@@ -13,14 +18,14 @@ export default function ShakeContent({ shakeData }) {
                         <List>
                             {shakeData.ingredients.map((ingredient, index) => (
                                 <ListItem key={index}>
-                                    <ListItemText primary={ingredient} />
+                                  <ListItemText primary={ingredient} />
                                 </ListItem>
                             ))}
                         </List>
                     </Container>
-                    <Container sx={{ my: 2, border: '1px solid #ccc', borderRadius: 2 }}>
+                    <Container sx={{ my: 2, pt:2, pb:1 ,border: '2px solid #ccc', borderRadius: 1 }}>
                         <Typography variant="h5">Instructions</Typography>
-                        {<Typography variant="body1">{shakeData.instructions}</Typography>}
+                        {<Typography variant="body1" sx={{my:3}}>{shakeData.instructions}</Typography>}
                     </Container>
                 </>
             ) : (

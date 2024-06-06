@@ -24,6 +24,7 @@ export default function ShakeBrief({ request, singleView = false, profileView = 
         try {
             const { data } = await request();
             setShakeData(singleView ? data : data.results || data);
+            // setShakeData(data)
         } catch (error) {
             console.log(error)
         }

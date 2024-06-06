@@ -19,13 +19,19 @@ export default function ButtonBox({ id, singleView, userId, ownerId , favourites
                 <>
                     {userId !== ownerId ? (
                         <>  
-                            <ToggleFavourite shakeId={id} likedStatus={favourites.includes(userId)} />
+                            <ToggleFavourite 
+                                shakeId={id} 
+                                likedStatus={favourites.includes(userId)} />
                             <Button variant='contained' onClick={() => navigate(`/shake/${id}`)}><OpenInFullIcon /></Button>
                         </>
                     ) : (
                         <>
-                            <Button variant='contained' onClick={() => navigate(`/updateshake/${id}`)}><EditIcon /></Button>
-                            <Button variant='contained' onClick={() => navigate(`/shake/${id}`)}><OpenInFullIcon /></Button>
+                            {/* <Button 
+                                variant='contained' 
+                                onClick={() => navigate(`/updateshake/${id}`)}><EditIcon /></Button> */}
+                            <Button 
+                                variant='contained' 
+                                onClick={() => navigate(`/shake/${id}`)}><OpenInFullIcon /></Button>
                         </>
                     )
                     }

@@ -30,6 +30,7 @@ export default function ToggleFavourite({ shakeId, likedStatus }) {
 
     return (
         <Button
+            sx={{ margin: '0.5rem' }}
             variant={liked ? 'contained' : 'outlined'}
             color="primary"
             startIcon={<FavoriteIcon />}

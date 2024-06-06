@@ -50,7 +50,7 @@ function a11yProps(index) {
 function ProfileShakeView({ shakes, currentUserId, singleView, title, showProfileCard, ownerId }) {
   return (
     <Box>
-      <Box 
+      <Box
         sx={{ mb: 1 }}>
         {shakes.length > 0 ? (
           shakes.map((shake) => (
@@ -59,8 +59,9 @@ function ProfileShakeView({ shakes, currentUserId, singleView, title, showProfil
               sx={{
                 boxShadow: 3,
                 borderRadius: 2,
-                pb:2,
+                pb: 2,
                 mb: 3,
+                pt: 2,
                 backgroundColor: 'rgba(254, 254, 254, 0.955)'
               }}>
               <Typography
@@ -76,7 +77,7 @@ function ProfileShakeView({ shakes, currentUserId, singleView, title, showProfil
                 <Box>
                   <Box
                     sx={{
-                      border: '1px solid rgba(159, 159, 159, 0.404)', 
+                      border: '1px solid rgba(159, 159, 159, 0.404)',
                       borderRadius: 1
                     }}
                     className='shake-image'
@@ -128,7 +129,13 @@ function ProfileShakeView({ shakes, currentUserId, singleView, title, showProfil
             </Box>
           ))
         ) : (
-          <Typography variant="h4">No favorites yet.</Typography>
+          <>
+          <Typography variant="h4" sx={{textAlign: 'center'}}>No {title} yet.</Typography>
+          {title === 'Posts' && (
+            <Typography variant="h6" sx={{textAlign: 'center', mt:2}}>Got a favorite shake recipe? Share it with our community! Click the <strong>ADD SHAKE</strong> button to the left.</Typography>
+          )}
+          </>
+          
         )}
       </Box>
     </Box>
@@ -191,83 +198,83 @@ export default function Profile() {
 
   return (
     <Box className='profile-holder'>
-    <Container 
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' }, 
-        mx:0,
-        px:2
-      }}>
-      <Box className='side-panel'
+      <Container
         sx={{
-        width: { xs: '100%', sm: '30%' },
-        mb: { xs: 2, sm: 0 },
-        mr: { sm: 2 }
-      }}>
-        <Box sx={{
           display: 'flex',
-          flexDirection: { xs: 'row', sm: 'column' },
-          alignItems: 'center',
-          mb: 2
+          flexDirection: { xs: 'column', sm: 'row' },
+          mx: 0,
+          px: 2
         }}>
-          <Avatar sx={{
-            width: 100,
-            height: 100,
-            mb: 2,
-            mr: { xs: 2, sm: 0 }
-          }}
-            src={userData.image} />
-          <Typography variant="h6">{userData.username}</Typography>
-        </Box>
-        <Tabs
-          orientation={isSmallScreen ? 'horizontal' : 'vertical'}
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="User profile tabs"
-          sx={{ borderRight: { sm: 1 }, borderBottom: { xs: 1, sm: 0 }, borderColor: 'divider' }}
-        >
-
-          <Tab label="Posts" {...a11yProps(0)} />
-          <Tab label="Favourites" {...a11yProps(1)} />
-          {userId == currentUserId && (
-            <Button variant="contained" color="success">
-              <Link className="link" to='/addshake'>
-                Add Shake
-              </Link>
-            </Button>
-          )}
-        </Tabs>
-      </Box>
-      <Box sx={{ width: { xs: '100%', sm: '90%' } }}>
-        <TabPanel value={value} index={0}>
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-
-            <ProfileShakeView
-              shakes={userShakes}
-              currentUserId={currentUserId}
-              title={'Posts'}
-              singleView={false}
-              ownerId={userData.id}
-              showProfileCard={false} />
+        <Box className='side-panel'
+          sx={{
+            width: { xs: '100%', sm: '30%' },
+            mb: { xs: 2, sm: 0 },
+            mr: { sm: 2 }
+          }}>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: { xs: 'row', sm: 'column' },
+            alignItems: 'center',
+            mb: 2
+          }}>
+            <Avatar sx={{
+              width: 100,
+              height: 100,
+              mb: 2,
+              mr: { xs: 2, sm: 0 }
+            }}
+              src={userData.image} />
+            <Typography variant="h6">{userData.username}</Typography>
           </Box>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {favoriteShakes ? (
+          <Tabs
+            orientation={isSmallScreen ? 'horizontal' : 'vertical'}
+            variant="scrollable"
+            value={value}
+            onChange={handleChange}
+            aria-label="User profile tabs"
+            sx={{ borderRight: { sm: 1 }, borderBottom: { xs: 1, sm: 0 }, borderColor: 'divider' }}
+          >
+
+            <Tab label="Posts" {...a11yProps(0)} />
+            <Tab label="Favourites" {...a11yProps(1)} />
+            {userId == currentUserId && (
+              <Button variant="contained" color="success">
+                <Link className="link" to='/addshake'>
+                  <strong>Add Shake</strong>
+                </Link>
+              </Button>
+            )}
+          </Tabs>
+        </Box>
+        <Box sx={{ width: { xs: '100%', sm: '90%' } }}>
+          <TabPanel value={value} index={0}>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
               <ProfileShakeView
-                shakes={favoriteShakes}
+                shakes={userShakes}
                 currentUserId={currentUserId}
-                title={'Favourits'}
+                title={'Posts'}
                 singleView={false}
-                showProfileCard={true} />
+                ownerId={userData.id}
+                showProfileCard={false} />
             </Box>
-          ) : (
-            <CircularProgress />
-          )}
-        </TabPanel>
-      </Box>
-    </Container>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {favoriteShakes ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <ProfileShakeView
+                  shakes={favoriteShakes}
+                  currentUserId={currentUserId}
+                  title={'Favourites'}
+                  singleView={false}
+                  showProfileCard={true} />
+              </Box>
+            ) : (
+              <CircularProgress />
+            )}
+          </TabPanel>
+        </Box>
+      </Container>
     </Box>
   )
 }
