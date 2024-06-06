@@ -1,16 +1,16 @@
-import { useNavigate , useParams} from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { getToken } from '../../lib/auth'
 import { jwtDecode } from 'jwt-decode'
 import axios from 'axios'
 
 // Material ui imports
-import { Container, Box, Typography,Rating, Avatar, Tabs, Tab, useMediaQuery, useTheme, CircularProgress } from '@mui/material';
+import { Container, Box, Typography, Button, Avatar, Tabs, Tab, useMediaQuery, useTheme, CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
 
 // Custom Components
 import ButtonBox from "../subcomponents/ButtonBox"
-
+import ProfileCard from "../elements/ProfileCard"
 
 // Tab Panel component for content display
 function TabPanel(props) {
@@ -29,7 +29,7 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  );
+  )
 }
 
 TabPanel.propTypes = {
@@ -45,103 +45,116 @@ function a11yProps(index) {
   };
 }
 
-// Placeholder component for uploaded shakes
-function UploadedShakes() {
+
+// Profile view card 
+function ProfileShakeView({ shakes, currentUserId, singleView, title, showProfileCard, ownerId }) {
   return (
     <Box>
-      <Typography variant="h5">Uploaded Shakes</Typography>
-      {/* Add more complex content here */}
-      <Box sx={{ mt: 2 }}>
-        <Typography>Shake 1</Typography>
-        <Typography>Shake 2</Typography>
-        <Typography>Shake 3</Typography>
-        {/* Add more shakes or complex content */}
-      </Box>
-    </Box>
-  );
-}
-
-
-
-
-
-
-
-
-// Component for favorited shakes
-function ProfileShakeView({ shakes, currentUserId , singleView, title }) {
-  return (
-    <Box>
-      <Typography variant="h5">Your {title} shakes</Typography>
-      <Box sx={{ mt: 2 }}>
+      <Box 
+        sx={{ mb: 1 }}>
         {shakes.length > 0 ? (
           shakes.map((shake) => (
-            <Box key={shake.id} sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3 }}>
-              <Typography variant='h5' sx={{ mb: 2 }}>{shake.name}</Typography>
-              <Container sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
+            <Box
+              key={shake.id}
+              sx={{
+                boxShadow: 3,
+                borderRadius: 2,
+                pb:2,
+                mb: 3,
+                backgroundColor: 'rgba(254, 254, 254, 0.955)'
+              }}>
+              <Typography
+                variant='h5'
+                sx={{ mb: 2, textAlign: 'center' }}>
+                {shake.name}
+              </Typography>
+              <Container
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' }
+                }}>
                 <Box>
-                  <Box className='shake-image' component='img' alt={name} src={shake.image} />
-                    <Typography variant='h6' sx={{ m: 3 }}>
-                        {shake.average_rating ? <Rating value={shake.average_rating} readOnly size="large" /> : 'No Ratings Yet'}
-                    </Typography>
+                  <Box
+                    sx={{
+                      border: '1px solid rgba(159, 159, 159, 0.404)', 
+                      borderRadius: 1
+                    }}
+                    className='shake-image'
+                    component='img'
+                    alt={shake.name}
+                    src={shake.image} />
                 </Box>
-                <Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <Box sx={{ textAlign: 'left', display: 'flex', flexDirection: 'column' }}>
-                    <Typography variant='h5' sx={{ my: 2 }}>
+                <Container
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}>
+                  <Box
+                    sx={{
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}>
+                    <Typography
+                      variant='h5'
+                      sx={{ my: 2 }}>
                       Categories: {shake.categories.map((category) =>
-                                    <Typography key={category.id}>{category.name}</Typography>
-                                )}
+                        <Typography
+                          key={category.id}>
+                          {category.name}
+                        </Typography>
+                      )}
                     </Typography>
-                    <Typography variant='h5' sx={{ my: 2 }}>
-                                Calories: {shake.calories}
+                    <Typography
+                      variant='h5'
+                      sx={{ my: 2 }}>
+                      Calories: {shake.calories}
                     </Typography>
-                    <Box sx={{ pb: { xs: 4, sm: 8 } }}>
-                      <ButtonBox 
-                        id={shake.id} 
-                        singleView={singleView} 
-                        userId={currentUserId} 
-                        ownerId={shake.owner.id} 
+                    {showProfileCard &&
+                      <ProfileCard owner={shake.owner} userId={currentUserId} />}
+                    <Box
+                      sx={{ pb: { xs: 4, sm: 8 } }}>
+                      <ButtonBox
+                        id={shake.id}
+                        singleView={singleView}
+                        userId={currentUserId}
+                        ownerId={ownerId}
                         favourites={shake.favourites} />
                     </Box>
                   </Box>
                 </Container>
               </Container>
-              {/* Render additional shake details here */}
             </Box>
           ))
         ) : (
-          <Typography>No favorite shakes found.</Typography>
+          <Typography variant="h4">No favorites yet.</Typography>
         )}
       </Box>
     </Box>
-  );
+  )
 }
 
 ProfileShakeView.propTypes = {
   shakes: PropTypes.array.isRequired,
   currentUserId: PropTypes.number.isRequired,
   singleView: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  showProfileCard: PropTypes.bool.isRequired,
+  ownerId: PropTypes.number.isRequired,
 }
 
 export default function Profile() {
-  // Material UI Stuff
+  // Material UI Integral
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [value, setValue] = useState(0);
-  const [loading, setLoading] = useState(true)
-
-
 
 
   const { userId } = useParams()
   const [userData, setUserData] = useState({})
   const [userShakes, setUserShakes] = useState([])
   const [favoriteShakes, setFavoriteShakes] = useState([])
-  const [reviews, setReviews] = useState([])
-
-
-
 
 
   const handleChange = (event, newValue) => {
@@ -155,32 +168,55 @@ export default function Profile() {
             Authorization: `Bearer ${getToken()}`
           }
         })
-        const { favorite_shakes, reviews_created, shakes_created } = data
+        const { favorite_shakes, shakes_created } = data
         setUserData(data)
         setUserShakes(shakes_created)
         setFavoriteShakes(favorite_shakes)
-        setReviews(userData)
-        console.log(favoriteShakes)
       } catch (error) {
         console.log(error)
       }
     }
     getUserData()
-  }, [userId])
+  }, [userId, userData])
+
+  // TO GET THE USER ID FROM THE TOKEN
+  const getUserId = (() => {
+    const decoded = jwtDecode(getToken())
+    return decoded.user_id
+  })
+  const currentUserId = getUserId()
 
 
-       // TO GET THE USER ID FROM THE TOKEN
-       const getUserId = (() => {
-        const decoded = jwtDecode(getToken())
-        return decoded.user_id
-    })
-    const currentUserId = getUserId()
+
 
   return (
-    <Container sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, mt: 4 }}>
-      <Box sx={{ width: { xs: '100%', sm: '30%' }, mb: { xs: 2, sm: 0 }, mr: { sm: 2 } }}>
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'row', sm: 'column' }, alignItems: 'center', mb: 2 }}>
-          <Avatar sx={{ width: 64, height: 64, mr: { xs: 2, sm: 0 } }} src={userData.image} />
+    <Box className='profile-holder'>
+    <Container 
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' }, 
+        mx:0,
+        px:2
+      }}>
+      <Box className='side-panel'
+        sx={{
+        width: { xs: '100%', sm: '30%' },
+        mb: { xs: 2, sm: 0 },
+        mr: { sm: 2 }
+      }}>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: { xs: 'row', sm: 'column' },
+          alignItems: 'center',
+          mb: 2
+        }}>
+          <Avatar sx={{
+            width: 100,
+            height: 100,
+            mb: 2,
+            mr: { xs: 2, sm: 0 }
+          }}
+            src={userData.image} />
           <Typography variant="h6">{userData.username}</Typography>
         </Box>
         <Tabs
@@ -191,26 +227,47 @@ export default function Profile() {
           aria-label="User profile tabs"
           sx={{ borderRight: { sm: 1 }, borderBottom: { xs: 1, sm: 0 }, borderColor: 'divider' }}
         >
-          <Tab label="Shared" {...a11yProps(0)} />
-          <Tab label="Favourited" {...a11yProps(1)} />
+
+          <Tab label="Posts" {...a11yProps(0)} />
+          <Tab label="Favourites" {...a11yProps(1)} />
+          {userId == currentUserId && (
+            <Button variant="contained" color="success">
+              <Link className="link" to='/addshake'>
+                Add Shake
+              </Link>
+            </Button>
+          )}
         </Tabs>
       </Box>
       <Box sx={{ width: { xs: '100%', sm: '90%' } }}>
         <TabPanel value={value} index={0}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <ProfileShakeView shakes={userShakes} currentUserId={currentUserId} title={'Shared'} singleView={true}/>
+
+            <ProfileShakeView
+              shakes={userShakes}
+              currentUserId={currentUserId}
+              title={'Posts'}
+              singleView={false}
+              ownerId={userData.id}
+              showProfileCard={false} />
           </Box>
         </TabPanel>
         <TabPanel value={value} index={1}>
           {favoriteShakes ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <ProfileShakeView shakes={favoriteShakes} currentUserId={currentUserId} title={'Favourite'} singleView={true}/>
+              <ProfileShakeView
+                shakes={favoriteShakes}
+                currentUserId={currentUserId}
+                title={'Favourits'}
+                singleView={false}
+                showProfileCard={true} />
             </Box>
           ) : (
-              <CircularProgress />
+            <CircularProgress />
           )}
         </TabPanel>
       </Box>
     </Container>
-  );
+    </Box>
+  )
 }

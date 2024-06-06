@@ -13,7 +13,6 @@ export default function ButtonBox({ id, singleView, userId, ownerId , favourites
     
 
     const navigate = useNavigate()
-    // console.log(favourites.includes(userId))
     return (
         <Container sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
             {!singleView ? (

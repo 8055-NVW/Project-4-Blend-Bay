@@ -6,6 +6,9 @@ from lib.permissions import IsOwnerOrReadOnly
 from .models import Shake
 from lib.views import ObjectOwnerView
 from rest_framework.response import Response
+# for search
+from rest_framework.decorators import api_view
+from django.db.models import Q
 
 # new
 from django.db.models import Avg
@@ -53,3 +56,15 @@ class ShakeFavouriteView(UpdateAPIView):
             shake.favourites.add(request.user)
             shake.save()
             return Response(status=201)
+        
+@api_view(['GET'])    
+def search_shakes(request):
+    query = request.query_params.get('q', '')
+    if query:
+        shakes = Shake.objects.filter(
+            Q(name__icontains=query) | 
+            Q(categories__name__icontains=query)
+        ).distinct()
+        serializer = PopulatedShakeSerializer(shakes, many=True)
+        return Response(serializer.data)
+    return Response({"error": "No query provided"}, status=400)

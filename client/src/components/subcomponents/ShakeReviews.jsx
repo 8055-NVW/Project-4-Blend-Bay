@@ -56,6 +56,9 @@ export default function ShakeReviews({ shakeData, reloadReviewData , userId}) {
             })
             handleClose()
             reloadReviewData()
+            setReviewData({text: '',
+            rating: 0,
+            shake: shakeId})
         } catch (error) {
             console.log(error.response.data)
         }

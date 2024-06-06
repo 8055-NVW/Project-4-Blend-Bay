@@ -5,6 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 export default function Footer() {
   return (
     <Container
+      id='footer'
       component="footer"
       sx={{
         display: 'flex',

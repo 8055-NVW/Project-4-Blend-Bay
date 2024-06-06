@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom"
 import { jwtDecode } from 'jwt-decode'
 import { getToken } from '../../lib/auth'
 
@@ -12,10 +11,7 @@ import ButtonBox from './ButtonBox'
 import ShakeContent from './ShakeContent'
 import ShakeReviews from './ShakeReviews'
 
-export default function ShakeBrief({ request, singleView = false , profileView = false}) {
-
-    const navigate = useNavigate()
-    const [shakeData, setShakeData] = useState(singleView ? null : [])
+export default function ShakeBrief({ request, singleView = false, profileView = false, searchQuery = '' }) {
 
     // TO GET THE USER ID FROM THE TOKEN
     const userId = (() => {
@@ -23,15 +19,11 @@ export default function ShakeBrief({ request, singleView = false , profileView =
         return decoded.user_id
     })
 
+    const [shakeData, setShakeData] = useState(singleView ? null : [])
     const getShakeData = async () => {
         try {
-            if (profileView){
-                setShakeData(request)
-                console.log(shakeData)
-            } else {
-                const { data } = await request()
-                setShakeData(data)
-            }
+            const { data } = await request();
+            setShakeData(singleView ? data : data.results || data);
         } catch (error) {
             console.log(error)
         }
@@ -40,14 +32,19 @@ export default function ShakeBrief({ request, singleView = false , profileView =
     useEffect(() => {
         getShakeData()
     }, [request])
-    
 
     // This saves the destructuring and return to a const so we dont have to repeat this code block. 
     // Will try to improve on this as im not sure if having it out of the return is the best way to do it
     const renderShakeDetails = (shake) => {
         const { id, name, categories, calories, image, average_rating, owner, favourites } = shake
         return (
-            <Box key={id} sx={{ boxShadow: 3, borderRadius: 5, pt: 1, my: 3 }}>
+            <Box key={id} 
+                 sx={{ 
+                    boxShadow: 3, 
+                    borderRadius: 1, 
+                    pt: 1, 
+                    my: 3, 
+                    backgroundColor: 'rgba(254, 254, 254, 0.955)' }}>
                 <Typography variant='h4' sx={{ mb: 2 }}>
                     {name}
                 </Typography>
@@ -81,9 +78,12 @@ export default function ShakeBrief({ request, singleView = false , profileView =
     }
 
     return (
-        <Container sx={{ textAlign: 'center', height: '100%' }}>
-            <Typography variant='h3' sx={{ mt: 2 }}>
-                {singleView ? 'Your Shake' : 'All Shakes'}
+        <Container sx={{ 
+                    textAlign: 'center', 
+                    height: '100%', 
+                    background:'linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(https://res.cloudinary.com/drdpt4mru/image/upload/v1717615539/Project-4%20GA/main-background_kljmjx.jpg)'}}>
+            <Typography variant='h5' sx={{ pt: 2 }}>
+                {singleView ? '👇' : searchQuery ? `Showing results for "${searchQuery}"` : 'All Shakes'}
             </Typography>
             {/* To define a single shake request or index */}
             {singleView ? (

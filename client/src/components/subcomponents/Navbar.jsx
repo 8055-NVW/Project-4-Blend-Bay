@@ -7,7 +7,6 @@ import { jwtDecode } from 'jwt-decode'
 // Material UI Imports
 import { AppBar, Toolbar, Typography, Box } from "@mui/material"
 import Fingerprint from '@mui/icons-material/Fingerprint';
-import HomeRounded from "@mui/icons-material/HomeRounded"
 import { styled, alpha } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search'
 import IconButton from '@mui/material/IconButton'
@@ -62,8 +61,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const goTos = ['Profile', 'Logout']
 
 export default function Navbar() {
-
   const navigate = useNavigate()
+
+  // Material UI user menu logic
+  const [anchorElUser, setAnchorElUser] = useState(null)
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget)
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  };
+
+
+  // FOR THE SEARCH FUNCTIONALITY a AND TO SAVE THE SEARCH QUERY
+  const [searchQuery, setSearchQuery] = useState("")
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value)
+  }
+  const handleSearchSubmit = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault()
+      navigate(`/search?q=${searchQuery}`)
+    }
+  }
 
   // TO GET THE USER ID FROM THE TOKEN
   const userId = (() => {
@@ -75,33 +95,35 @@ export default function Navbar() {
     if (goTo === 'Logout') {
       removeToken()
       navigate("/")
-      // console.log('handle loggin out')
     } else if (goTo === 'Profile') {
       navigate(`/profile/${userId()}/`)
-      // console.log('Handling profile page')
     }
   }
-
-  const [anchorElUser, setAnchorElUser] = useState(null)
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  };
 
   return (
     <AppBar position="sticky">
       <Toolbar
         sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Link to={isLoggedIn() ? '/home' : '/'}>
-          <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
-            Site Name
-          </Typography>
-          <HomeRounded sx={{ display: { xs: 'black', sm: 'none', } }} />
+          <Box component="img" 
+            sx={{
+              display: { xs: 'none', sm: 'block' }, 
+              height: 30, 
+              width: 150,
+              borderRadius: '4px',
+              }} 
+              alt="home" 
+              src="https://res.cloudinary.com/drdpt4mru/image/upload/v1717606809/Project-4%20GA/site-name1_v1on3v.png" />
+          <Box component="img" 
+            sx={{
+              display: { xs: 'block', sm: 'none' }, 
+              height: 50, 
+              width: 50,
+              borderRadius: '50%',}} 
+              alt="home" 
+              src="https://res.cloudinary.com/drdpt4mru/image/upload/v1717606948/Project-4%20GA/logo_seyzjh.png" />
         </Link>
+        <Box sx={{display:'flex'}}>
         {isLoggedIn() && (
           <Search>
             <SearchIconWrapper>
@@ -110,10 +132,12 @@ export default function Navbar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onKeyDown={handleSearchSubmit}
             />
           </Search>
         )}
-        <Box>
           {isLoggedIn() ?
             (<>
               <Tooltip title="Open settings">
@@ -145,7 +169,6 @@ export default function Navbar() {
             (<>
               <IconButton size="large">
                 <NavLink to='/auth'>
-                  {/* <LoginIcon/> */}
                   <Fingerprint sx={{ color: 'white', border: '1px solid white', borderRadius: '50%', width: '35px', height: '35px' }} />
                 </NavLink>
               </IconButton>

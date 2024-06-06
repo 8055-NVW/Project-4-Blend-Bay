@@ -11,15 +11,15 @@ const FormContainer = styled('div')({
 
 export default function FormPage({ children }) {
     return (
-        <FormContainer>
-            <Container sx={{
+        <FormContainer className='form-container'>
+            <Container className='form'
+                    sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
                     maxWidth: 'sm',
-                    boxShadow: 3,
-                    borderRadius: 4,
+                    boxShadow: 3, 
                 }}>
                 {children}
             </Container>

@@ -4,11 +4,8 @@ import axios from 'axios'
 import {Button, Input, Box} from '@mui/material'
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
 
-
 export default function ImageUpload({ formData, setFormData , profile}){
-
   const [error, setError] = useState('')
-
   const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET
   const uploadUrl = import.meta.env.VITE_CLOUDINARY_URL
 
@@ -27,11 +24,15 @@ export default function ImageUpload({ formData, setFormData , profile}){
 
   return (
     <>
-        { formData.image && <Box sx={{textAlign:'center'}}><img className={profile ? 'profile-image':'shake-image'} src={formData.image} alt="Uploaded image" /></Box>}
+        { formData.image && 
+        <Box sx={{
+          textAlign:'center', 
+          mb:2
+          }}><img className={profile ? 'profile-image':'shake-image'} src={formData.image} alt="Uploaded image" /></Box>}
         <Button
             variant="contained"
             component="label"
-            fullWidth
+            
             startIcon={<PhotoCamera />}>
                 Add a Picture
             <Input
@@ -43,11 +44,6 @@ export default function ImageUpload({ formData, setFormData , profile}){
                 sx={{ display: 'none' }} />
         </Button>
         {error && <p className='text-danger'>{ error }</p>}
-
-      {/* { formData.image && <img src={formData.image} alt="Uploaded image" />}
-      <label hidden htmlFor="image">Image</label>
-      <input type="file" name="image" id="image" onChange={handleUpload} />
-      {error && <p className='text-danger'>{ error }</p>} */}
     </>
   )
 }

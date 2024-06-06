@@ -17,6 +17,7 @@ import Profile from './components/pages/Profile.jsx'
 import Shake from './components/pages/Shake.jsx'
 import AddShake from './components/pages/AddShake.jsx'
 import UpdateShake from './components/pages/UpdateShake.jsx'
+import SearchResults from './components/pages/SearchResults.jsx'
 
 // Material UI Theme
 const theme = createTheme({
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: 'updateshake/:shakeId',
         element: <UpdateShake />
+      },
+      {
+        path: 'search',
+        element: <SearchResults/>
       }
     ]
   }

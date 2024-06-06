@@ -85,6 +85,7 @@ export default function ShakeForm({ title, request, onLoad }) {
 
   return (
     <FormPage>
+      <Box sx={{textAlign: 'center'}}>
       <Typography variant='h5'>
         {title} Shake
       </Typography>
@@ -144,14 +145,29 @@ export default function ShakeForm({ title, request, onLoad }) {
               </Typography>
             )}
           </>
-          <Button type="button" variant="contained" color='secondary' sx={{ my: 3 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent:'space-around',
+            pb:4,
+            pt:1}}>
+          <Button            
+            type="button" 
+            variant="contained" 
+            color='secondary' 
+            onClick={() => navigate(-1)}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" color='primary' sx={{ my: 3 }}>
+          <Button 
+            type="submit" 
+            variant="contained" 
+            color='primary' 
+            >
             {title === 'Add' ? 'Add Shake' : 'Update Shake'}
           </Button>
+          </Box>
         </Container>
       </form>
+      </Box>
     </FormPage>
   )
 }
