@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-<<<<<<< HEAD
 
 # For Deployment
 import os
@@ -29,10 +28,6 @@ environ.Env.read_env()
 
 
 
-=======
-from pathlib import Path
-
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,7 +41,6 @@ SECRET_KEY = 'django-insecure-b*=j$57&v_cuyi4up!0*q04%j(e3-f8q)hri(g)foxwy347ou3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # settings.py
@@ -59,13 +53,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
-=======
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,7 +60,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'django.contrib.sites',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -148,26 +134,6 @@ CORS_ALLOW_HEADERS = (
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 ###Google OAUTH
-=======
-    'rest_framework',
-    'rest_framework_simplejwt',
-    # 'cloudinary',
-    # 'cloudinary_storage',
-    'shakes',
-    'users',
-    'reviews',
-    'categories'
-]
-
-#Cloudinary 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'drdpt4mru',
-    'API_KEY': '383842631678643',
-    'API_SECRET': 'mM4d6S8_hhXE-7pdGMMTFuHupsM'
-} 
-
-
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 
 # To get a UserToken JWT
 REST_FRAMEWORK = {
@@ -183,7 +149,6 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1)
 }
 
-<<<<<<< HEAD
 
 
 MIDDLEWARE = [
@@ -191,17 +156,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-=======
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
     # OAUTH
     'allauth.account.middleware.AccountMiddleware'
 ]
@@ -228,16 +186,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'client')] #Look, we have added the root folder of frontend here
         ,
-=======
-]
-
-ROOT_URLCONF = 'finalproject.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -250,10 +198,6 @@ TEMPLATES = [
     },
 ]
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 WSGI_APPLICATION = 'finalproject.wsgi.application'
 
 
@@ -263,11 +207,7 @@ WSGI_APPLICATION = 'finalproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-<<<<<<< HEAD
         'NAME': 'project-4-shakes',
-=======
-        'NAME': 'project-4',
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
         'USER': 'vivlop',
         'PASSWORD': '8055',
         'HOST': 'localhost',
@@ -312,20 +252,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-<<<<<<< HEAD
 STATIC_ROOT = 'static/'
-=======
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< HEAD
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'client', "dist"),
 )
 
-=======
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
