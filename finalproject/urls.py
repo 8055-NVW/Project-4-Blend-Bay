@@ -22,14 +22,14 @@ from .views import index
 # from django.urls import path, include
 # from users.views import GoogleLogin
 
-from django.middleware.csrf import get_token
-from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
+# from django.middleware.csrf import get_token
+# from django.http import JsonResponse
+# from django.views.decorators.csrf import ensure_csrf_cookie
 
 # new
-@ensure_csrf_cookie
-def set_csrf_token(request):
-    return JsonResponse({'csrfToken': get_token(request)})
+# @ensure_csrf_cookie
+# def set_csrf_token(request):
+#     return JsonResponse({'csrfToken': get_token(request)})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,7 +41,7 @@ urlpatterns = [
     # path('api/accounts/', include('allauth.urls')),
     # path('api/accounts/google/login/', GoogleLogin.as_view(), name='google_login'),
     # new
-    path('api/set-token/', set_csrf_token),
+    # path('api/set-token/', set_csrf_token),
     # For Deployment
     re_path(r'^.*$', index)
 ]
