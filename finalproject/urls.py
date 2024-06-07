@@ -15,13 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD
 # new For Deployment
 from django.urls import path, include, re_path
 from .views import index
 # new ^^^^
 # from django.urls import path, include
-from users.views import GoogleLogin
+# from users.views import GoogleLogin
 
 from django.middleware.csrf import get_token
 from django.http import JsonResponse
@@ -31,27 +30,18 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 def set_csrf_token(request):
     return JsonResponse({'csrfToken': get_token(request)})
-=======
-from django.urls import path, include
-
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/shakes/', include('shakes.urls')),
     path('api/auth/', include('users.urls')),
-<<<<<<< HEAD
     path('api/reviews/', include('reviews.urls')),
     path('api/categories/', include('categories.urls')),
     # OAUTH
     # path('api/accounts/', include('allauth.urls')),
-    path('api/accounts/google/login/', GoogleLogin.as_view(), name='google_login'),
+    # path('api/accounts/google/login/', GoogleLogin.as_view(), name='google_login'),
     # new
     path('api/set-token/', set_csrf_token),
     # For Deployment
     re_path(r'^.*$', index)
 ]
-=======
-    path('api/reviews/', include('reviews.urls'))
-]
->>>>>>> 0f82a3b33801132971e8c7e6c9ea4bd5fe687085

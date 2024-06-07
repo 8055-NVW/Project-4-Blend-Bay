@@ -61,72 +61,16 @@ INSTALLED_APPS = [
     'reviews',
     'categories',
     # 'corsheaders',
-    #For Google OAUTH
-    'rest_framework.authtoken',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'corsheaders'
+    # #For Google OAUTH
+    # 'rest_framework.authtoken',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'corsheaders'
 ]
 
 
-
-###Google OAUTH
-SITE_ID = 7
-
-AUTHENTICATION_BACKENDS = [
-  'django.contrib.auth.backends.ModelBackend',
-  'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'APP': {
-#             'client_id': env('GOOGLE_CLIENT_ID'),
-#             'secret': env('GOOGLE_CLIENT_SECRET'),
-#             'key': ''
-#         }
-#     }
-# }
-
-LOGIN_REDIRECT_URL = '/'
-
-ACCOUNT_EMAIL_REQUIRED = True
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'http://localhost:5173'
-]
-
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
-    'http://localhost:5173'
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost"
-]
-
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-)
-
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
-###Google OAUTH
 # To get a UserToken JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

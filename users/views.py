@@ -4,9 +4,9 @@ from .serializers.common import RegisterSerializer
 from .serializers.populated import ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
 
-# oauth
-from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from dj_rest_auth.registration.views import SocialLoginView
+# # oauth
+# from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+# from dj_rest_auth.registration.views import SocialLoginView
 
 
 class RegisterView(CreateAPIView):
@@ -20,5 +20,5 @@ class ProfileView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
 
 # oauth
-class GoogleLogin(SocialLoginView):
-    adapter_class = GoogleOAuth2Adapter
+# class GoogleLogin(SocialLoginView):
+#     adapter_class = GoogleOAuth2Adapter

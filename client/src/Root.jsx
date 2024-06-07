@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import axios from 'axios'
+// import axios from 'axios'
 
 import Navbar from "./components/subcomponents/Navbar"
 import Footer from "./components/subcomponents/Footer"
