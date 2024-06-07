@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 django-allauth = "*"
 django-cors-headers = "*"
 django-on-heroku = "*"
+django-environ = "*"
 
 [dev-packages]
 
