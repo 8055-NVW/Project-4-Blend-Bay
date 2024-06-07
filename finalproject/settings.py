@@ -11,15 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 
-
-
 import django_on_heroku
-
 import os
-
-
-
-
 
 from pathlib import Path
 
@@ -27,9 +20,6 @@ import environ
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
-
-
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,7 +43,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 #     'http://localhost/',
 #     'http://127.0.0.1:5173',
 # ]
-
 
 
 # Application definition
@@ -138,14 +127,12 @@ CORS_ALLOW_HEADERS = (
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 ###Google OAUTH
-
 # To get a UserToken JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-
 from datetime import timedelta
 
 # Token Validity
@@ -209,14 +196,17 @@ WSGI_APPLICATION = 'finalproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project-4-shakes',
-        'USER': 'vivlop',
-        'PASSWORD': '8055',
-        'HOST': 'localhost',
-        'PORT': 5432
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': env('PGDATABASE'),
+    'USER': env('PGUSER'),
+    'PASSWORD': env('PGPASSWORD'),
+    'HOST': env('PGHOST'),
+    'PORT': env('PGPORT'),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
 }
 
 AUTH_USER_MODEL = 'users.User'
