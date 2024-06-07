@@ -100,22 +100,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'finalproject.urls'
-# OLD
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -149,6 +134,18 @@ DATABASES = {
     },
   }
 }
+
+# old db
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'project-4-shakes',
+#         'HOST': 'localhost',
+#         'USER': 'vivlop',
+#         'PASSWORD': '',
+#         'PORT': 5432
+#     }
+# }
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -197,7 +194,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'client', "dist"),
 )
-
 
 # for Heroku Deployment
 django_on_heroku.settings(locals())

@@ -4,7 +4,7 @@
   "pk": 3,
   "fields": {
     "name": "Tropical Green Smoothie",
-    "image": "https://placehold.co/400x400",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717673314/Project-4%20GA/fraiche-living-tropical-green-smoothie_cfbzu8.jpg",
     "calories": 300,
     "ingredients": "[\"1 cup spinach\", \"1 cup pineapple chunks\", \"1 banana\", \"1 cup almond milk\", \"1 tbsp honey\"]",
     "instructions": "Add all ingredients to a blender and blend on high speed until smooth and creamy. If the smoothie is too thick, add a splash of almond milk or water to achieve desired consistency.",
@@ -22,7 +22,7 @@
   "pk": 4,
   "fields": {
     "name": "Peanut Butter Banana Shake",
-    "image": "https://placehold.co/400x400",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717673195/Project-4%20GA/peanut-butter-banana-smoothie-www_cr7txu.webp",
     "calories": 450,
     "ingredients": "[\"1 banana\", \"2 tbsp peanut butter\", \"1 cup milk\", \"1 scoop vanilla protein powder\", \"1 tsp cinnamon\"]",
     "instructions": "Combine all ingredients in a blender and blend until smooth and creamy. For a thicker shake, add a few ice cubes and blend again briefly.",
@@ -33,7 +33,8 @@
       5
     ],
     "favourites": [
-      23
+      23,
+      59
     ]
   }
 },
@@ -42,7 +43,7 @@
   "pk": 5,
   "fields": {
     "name": "Strawberry Keto Smoothie",
-    "image": "https://placehold.co/400x400",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717673380/Project-4%20GA/StrawberrySmoothiesquare_cp80qi.jpg",
     "calories": 250,
     "ingredients": "[\"1 cup strawberries\", \"1 cup unsweetened almond milk\", \"1/4 cup chia seeds\", \"1 tbsp MCT oil\", \"1 scoop vanilla protein powder\"]",
     "instructions": "In a blender, combine the strawberries, almond milk, chia seeds, MCT oil, and protein powder. Blend on high speed until smooth and creamy, scraping down the sides as needed.",
@@ -51,9 +52,7 @@
       3,
       6
     ],
-    "favourites": [
-      53
-    ]
+    "favourites": []
   }
 },
 {
@@ -61,7 +60,7 @@
   "pk": 6,
   "fields": {
     "name": "Chocolate Avocado Shake",
-    "image": "https://placehold.co/400x400",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717672951/Project-4%20GA/cug0mmbeev4a0nwejwn7.webp",
     "calories": 400,
     "ingredients": "[\"1 ripe avocado\", \"1 cup unsweetened almond milk\", \"2 tbsp cocoa powder\", \"2 tbsp maple syrup\", \"1 tsp vanilla extract\"]",
     "instructions": "Add all ingredients to a high-powered blender and blend until completely smooth and creamy, about 1-2 minutes. If the shake is too thick, add a splash of almond milk to reach desired consistency.",
@@ -71,44 +70,161 @@
       6,
       7
     ],
-    "favourites": []
-  }
-},
-{
-  "model": "shakes.shake",
-  "pk": 15,
-  "fields": {
-    "name": "sdfasdfs",
-    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717155985/Project-4%20GA/njezbhnri8dwiifius5p.jpg",
-    "calories": 22323,
-    "ingredients": "[\"2342\", \"sadfasdf\", \"asdfsadf\", \"sadfasdf\", \"sdfsdf\", \"23r\", \"sdf\"]",
-    "instructions": "a sdasdasd afds df sadfsadf asdfsdf asfsdf",
-    "owner": 54,
-    "categories": [
-      3,
-      5
-    ],
     "favourites": [
-      53
+      59
     ]
   }
 },
 {
   "model": "shakes.shake",
-  "pk": 16,
+  "pk": 19,
   "fields": {
-    "name": "Check if update",
-    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717194885/Project-4%20GA/c815ujyiet2r3ozfso6w.jpg",
-    "calories": 777,
-    "ingredients": "[\"check1\", \"check2\", \"check 3\"]",
-    "instructions": "check again",
-    "owner": 53,
+    "name": "Mango Pineapple Vitamin Boost",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717673862/Project-4%20GA/tropical-mango-pineapple-smoothie-in-2-glasses-with-straws-500x500_fspotf.jpg",
+    "calories": 280,
+    "ingredients": "[\"Mango\", \"Pineapple\", \"Orange juice\", \"Spinach\", \"Chia seeds\"]",
+    "instructions": "Blend all ingredients until smooth. Serve with a slice of pineapple.",
+    "owner": 22,
     "categories": [
-      8,
-      2,
-      10
+      10,
+      4
     ],
-    "favourites": []
+    "favourites": [
+      19,
+      14,
+      22,
+      53,
+      59
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 20,
+  "fields": {
+    "name": "Keto Coffee Shake",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717674118/Project-4%20GA/keto-coffee-smoothie-recipe_21791896d80b1c5bf240c38e42b50da7_ssgee8.png",
+    "calories": 300,
+    "ingredients": "[\"Cold brew coffee\", \"Heavy cream\", \"MCT oil\", \"Stevia\", \"Ice\"]",
+    "instructions": "Blend all ingredients until smooth. Serve with a sprinkle of cocoa powder.",
+    "owner": 21,
+    "categories": [
+      6
+    ],
+    "favourites": [
+      16,
+      17,
+      15
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 21,
+  "fields": {
+    "name": "Strawberry Cheesecake Milkshake",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717675155/Project-4%20GA/vegan-strawberry-cheesecake-milkshake-2-500x500_uayo8w.webp",
+    "calories": 450,
+    "ingredients": "[\"Strawberries\", \"Vanilla ice cream\", \"Cream cheese\", \"Milk\", \"Graham cracker crumbs\"]",
+    "instructions": "Blend all ingredients until smooth. Top with whipped cream and graham cracker crumbs.",
+    "owner": 20,
+    "categories": [
+      4,
+      5
+    ],
+    "favourites": [
+      19,
+      22,
+      14,
+      23
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 22,
+  "fields": {
+    "name": "Gluten-Free Banana Oat Shake",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717674870/Project-4%20GA/Banana-Oatmeal-Smoothie-3-500x500_kmpnx9.webp",
+    "calories": 320,
+    "ingredients": "[\"Banana\", \"Gluten-free oats\", \"Almond milk\", \"Honey\", \"Cinnamon\"]",
+    "instructions": "Combine all ingredients in a blender and blend until smooth. Serve chilled.",
+    "owner": 19,
+    "categories": [
+      2
+    ],
+    "favourites": [
+      16,
+      20,
+      21,
+      15
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 23,
+  "fields": {
+    "name": "Vegan Berry Bliss Smoothie",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717675217/Project-4%20GA/image-9346_km4yjt.webp",
+    "calories": 180,
+    "ingredients": "[\"Strawberries\", \"Blueberries\", \"Raspberries\", \"Oat milk\", \"Chia seeds\"]",
+    "instructions": "Blend all ingredients until smooth. Serve immediately.",
+    "owner": 18,
+    "categories": [
+      1,
+      4
+    ],
+    "favourites": [
+      14,
+      19,
+      21,
+      22,
+      23
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 24,
+  "fields": {
+    "name": "Blueberry Almond Keto Shake",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717674934/Project-4%20GA/Lamington-12_qw7s9s.jpg",
+    "calories": 200,
+    "ingredients": "[\"Blueberries\", \"Almond milk\", \"Vanilla extract\", \"Stevia\", \"Ice\"]",
+    "instructions": "Blend all ingredients until smooth. Serve with a handful of whole almonds.",
+    "owner": 17,
+    "categories": [
+      9,
+      6
+    ],
+    "favourites": [
+      16,
+      18,
+      20,
+      15
+    ]
+  }
+},
+{
+  "model": "shakes.shake",
+  "pk": 25,
+  "fields": {
+    "name": "Tropical Fruit Smoothie",
+    "image": "https://res.cloudinary.com/drdpt4mru/image/upload/v1717675082/Project-4%20GA/tropical-passion-fruit-smoothie-570x570_gczbc3.webp",
+    "calories": 300,
+    "ingredients": "[\"Mango\", \"Pineapple\", \"Coconut water\", \"Greek yogurt\"]",
+    "instructions": "Blend all ingredients until smooth. Garnish with a pineapple slice.",
+    "owner": 16,
+    "categories": [
+      4
+    ],
+    "favourites": [
+      15,
+      21,
+      22,
+      23
+    ]
   }
 }
 ]

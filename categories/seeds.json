@@ -68,5 +68,12 @@
   "fields": {
     "name": "Vitamin-Enriched"
   }
+},
+{
+  "model": "categories.category",
+  "pk": 11,
+  "fields": {
+    "name": "Vegan"
+  }
 }
 ]
