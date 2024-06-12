@@ -4,7 +4,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 
 export default function Footer() {
   return (
-    // Changed the below to a box to extend footer to 100% of screen width
+    // Changed the below to a box to extend footer to 100% of screen width .
     <Box
       id='footer'
       component="footer"
