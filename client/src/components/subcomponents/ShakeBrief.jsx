@@ -39,13 +39,14 @@ export default function ShakeBrief({ request, singleView = false, profileView = 
     const renderShakeDetails = (shake) => {
         const { id, name, categories, calories, image, average_rating, owner, favourites } = shake
         return (
-            <Box key={id} 
-                 sx={{ 
-                    boxShadow: 3, 
-                    borderRadius: 1, 
-                    pt: 1, 
-                    my: 3, 
-                    backgroundColor: 'rgba(254, 254, 254, 0.955)' }}>
+            <Box key={id}
+                sx={{
+                    boxShadow: 3,
+                    borderRadius: 1,
+                    pt: 1,
+                    my: 3,
+                    backgroundColor: 'rgba(254, 254, 254, 0.955)'
+                }}>
                 <Typography variant='h4' sx={{ mb: 2 }}>
                     {name}
                 </Typography>
@@ -79,26 +80,30 @@ export default function ShakeBrief({ request, singleView = false, profileView = 
     }
 
     return (
-        <Container sx={{ 
-                    textAlign: 'center', 
-                    height: '100%', 
-                    background:'linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(https://res.cloudinary.com/drdpt4mru/image/upload/v1717615539/Project-4%20GA/main-background_kljmjx.jpg)'}}>
-            <Typography variant='h5' sx={{ pt: 2 }}>
-                {singleView ? '👇' : searchQuery ? `Showing results for "${searchQuery}"` : 'All Shakes'}
-            </Typography>
-            {/* To define a single shake request or index */}
-            {singleView ? (
-                shakeData && renderShakeDetails(shakeData)
-            ) : (
-                shakeData.map((shake) => renderShakeDetails(shake))
-            )}
-            {/* To ensure below only load on single view */}
-            {singleView &&
-                <>
-                    <ShakeContent shakeData={shakeData} />
-                    <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} userId={userId()} />
-                </>
-            }
-        </Container>
+        // refactored to have a container inside a box to center content
+        <Box sx={{
+            textAlign: 'center',
+            height: '100%',
+            background: 'linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(https://res.cloudinary.com/drdpt4mru/image/upload/v1717615539/Project-4%20GA/main-background_kljmjx.jpg)'
+        }}>
+            <Container>
+                <Typography variant='h5' sx={{ pt: 2 }}>
+                    {singleView ? '👇' : searchQuery ? `Showing results for "${searchQuery}"` : 'All Shakes'}
+                </Typography>
+                {/* To define a single shake request or index */}
+                {singleView ? (
+                    shakeData && renderShakeDetails(shakeData)
+                ) : (
+                    shakeData.map((shake) => renderShakeDetails(shake))
+                )}
+                {/* To ensure below only load on single view */}
+                {singleView &&
+                    <>
+                        <ShakeContent shakeData={shakeData} />
+                        <ShakeReviews shakeData={shakeData} reloadReviewData={getShakeData} userId={userId()} />
+                    </>
+                }
+            </Container>
+        </Box>
     )
 }

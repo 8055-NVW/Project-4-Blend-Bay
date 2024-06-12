@@ -8,13 +8,13 @@ body {
         flex-direction: column;
 
         .main {
-            // display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
     }
 }
 
+// LANDING PAGE
 .landing-page{
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('https://res.cloudinary.com/drdpt4mru/image/upload/v1717615539/Project-4%20GA/main-background_kljmjx.jpg');
     background-size: cover;
@@ -22,8 +22,10 @@ body {
     .text-container {
         background-color: rgba(43, 43, 43, 0.929);
         border-radius: 10px;
-        padding: 4em 2em;
         color: white;
+        // made styling changes below
+        padding: 2em 2em;
+        max-width: 500px;
 
         .logo {
             height: 100px;
@@ -35,16 +37,17 @@ body {
     }
 }
 
+// FORM COMPONENT
 .form-container {
     background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url('https://res.cloudinary.com/drdpt4mru/image/upload/v1717615539/Project-4%20GA/main-background_kljmjx.jpg');
-    background-size: cover; 
-    
+    background-size: cover;  
 }
-
 .form {
     display: contents;
     background-color: rgba(254, 254, 254, 0.955);
     border-radius: 2px;
+    // new styling changes below to override the default  material UI styling for containers
+    max-width: 600px !important;
 }
 
 .shake-image {
@@ -90,11 +93,3 @@ body {
     }
 }
 
-// @media (min-width: 1200px) {
-//     .css-6tvlz-MuiContainer-root {
-//         max-width: 100vw !important;
-//     }
-//     .css-bhh9xf-MuiContainer-root {
-//         max-width: 100vw !important;
-//     }
-// }

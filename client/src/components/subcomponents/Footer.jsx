@@ -1,10 +1,11 @@
-import { Box, Typography, IconButton, Container } from '@mui/material'
+import { Box, Typography, IconButton } from '@mui/material'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 
 export default function Footer() {
   return (
-    <Container
+    // Changed the below to a box to extend footer to 100% of screen width
+    <Box
       id='footer'
       component="footer"
       sx={{
@@ -15,7 +16,7 @@ export default function Footer() {
         backgroundColor: '#f8f8f8',
         boxShadow: '0 -1px 3px rgba(0,0,0,0.1)',
         mt: 'auto',
-        width: '100%'
+        width: '100'
       }}
     >
       <Typography variant="body1">
@@ -41,6 +42,6 @@ export default function Footer() {
           <LinkedInIcon />
         </IconButton>
       </Box>
-    </Container>
+    </Box>
   )
 }
