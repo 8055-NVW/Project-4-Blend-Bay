@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'users',
     'reviews',
     'categories',
-    # 'corsheaders',
+    # enabled below for development
+    'corsheaders',
     # #For Google OAUTH
     # 'rest_framework.authtoken',
     # 'allauth',
@@ -104,7 +105,7 @@ ROOT_URLCONF = 'finalproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'client')] #Look, we have added the root folder of the frontend here
+        'DIRS': [os.path.join(BASE_DIR, 'client')] 
         ,
         'APP_DIRS': True,
         'OPTIONS': {

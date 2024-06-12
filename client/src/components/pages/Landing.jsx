@@ -2,7 +2,7 @@ import { Container, Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
-const LandingPageContainer = styled(Container)({
+const LandingPageContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
